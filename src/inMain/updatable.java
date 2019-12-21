@@ -10,5 +10,5 @@ public interface updatable {
 	{
 		State.removeUpdate(this);
 	}
-	public void update(long delta);
+	public boolean update(long delta);
 }

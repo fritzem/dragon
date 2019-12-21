@@ -1,5 +1,6 @@
 package inMain;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Stack;
 
 import graphics.Map;
@@ -11,7 +12,9 @@ public class State {
 	//Generic Arrays
 	private Stack<focusable> focus;
 	private ArrayList<drawable> draw;
+	
 	private static ArrayList<updatable> updates;
+	static Iterator<updatable> upIt;
 	
 	
 	public static ArrayList<Menu> menus;
@@ -127,9 +130,12 @@ public class State {
 	
 	public static void update()
 	{
-		for (updatable u : updates)
+		upIt = updates.iterator();
+		while (upIt.hasNext())
 		{
-			u.update(0l);
+			updatable u = upIt.next();
+			if (u.update(0l))
+				upIt.remove();
 		}
 	}
 }

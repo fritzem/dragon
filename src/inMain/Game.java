@@ -74,7 +74,7 @@ public class Game {
 			
 			if (System.currentTimeMillis() >= secondTime + 1000)
 			{
-				//System.out.println(frames);
+				State.setFPS(frames);
 				frames = 0;
 				secondTime += 1000;
 			}

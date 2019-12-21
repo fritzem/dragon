@@ -15,6 +15,7 @@ public abstract class Menu implements updatable{
 	protected int ticks;
 	protected int cap;
 	protected boolean open;
+	protected int aug;
 	
 	protected int x;
 	protected int y;
@@ -34,7 +35,9 @@ public abstract class Menu implements updatable{
 		
 		
 		showName = true;
+		
 		open = false;
+		aug = 1;
 	}
 
 	public void draw(Graphics2D g, Sprite[] chars)
@@ -77,6 +80,7 @@ public abstract class Menu implements updatable{
 	
 	public boolean execute()
 	{
+		aug = 1;
 		cap = y;
 		ticks = 0;
 		open = false;
@@ -87,25 +91,31 @@ public abstract class Menu implements updatable{
 	
 	public void close()
 	{
-		cap = 0;
-		ticks = 0;
+		aug = -1;
 		open = false;
-		State.dequeue(this);
-		removeUpdate();
 	}
 	
-	public void update(long delta)
+	public void finishClose()
+	{
+		
+		//removeUpdate();
+	}
+	
+	public boolean update(long delta)
 	{
 		if (!open)
 		{
-			ticks++;
+			ticks += aug;
 			cap = y + ticks / 1 * 8;
 			if (cap >= y + height)
-			{
-				cap = y + height;
 				open = true;
+			if (ticks <= 0)
+			{
+				State.dequeue(this);
+				return true;
 			}
 		}
+		return false;
 	}
 	
 	
