@@ -16,8 +16,7 @@ public class TextMenu extends FocusMenu{
 	private String text;
 	private ArrayList<String> pages;
 	private int pageCursor;
-	
-	
+	private int charTick;
 	
 	public TextMenu(String s)
 	{
@@ -29,6 +28,7 @@ public class TextMenu extends FocusMenu{
 	
 	public void init()
 	{
+		charTick = 0;
 		pageCursor = 0;
 		pages = new ArrayList<String>(1);
 		parse();
@@ -110,12 +110,25 @@ public class TextMenu extends FocusMenu{
 		String[] thins = (pages.get(pageCursor)).split("\\|");
 		int xi = x + 8;
 		int yi = y + 8;
+		int lengths = 0;
 		for (String s : thins)
 		{
-			drawText(g, chars, s, xi, yi);
+			if (charTick > lengths + s.length())
+				drawText(g, chars, s, xi, yi);
+			else
+				drawText(g, chars, s.substring(0, charTick - lengths), xi, yi);
+			lengths += s.length();
+			if (lengths > charTick)
+				break;
 			yi += 8;
 		}
 		
+	}
+	
+	public boolean execute()
+	{
+		init();
+		return super.execute();
 	}
 
 	public void input() 
@@ -131,6 +144,13 @@ public class TextMenu extends FocusMenu{
 			}
 			
 		}
+	}
+	
+	public boolean update(long delta)
+	{
+		if (open)
+			charTick++;
+		return super.update(delta);
 	}
 	
 	public String getText()

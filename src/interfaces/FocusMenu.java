@@ -35,7 +35,6 @@ public abstract class FocusMenu extends Menu implements focusable {
 			return;
 		if (Input.getInput().getKeys()[4])
 		{
-			System.out.println("LOSER");
 			Input.getInput().getKeys()[4] = false;			
 			close();
 		}
