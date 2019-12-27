@@ -65,11 +65,15 @@ public abstract class Menu implements updatable{
 	
 	public void drawText(Graphics2D g, Sprite[] chars, String text, int x, int y)
 	{
-		
 		for (int i = 0; i < text.length(); i++)
-		{
 			chars[text.charAt(i) - 32].draw(g, x + i * 8, y, cap);
-		}
+	}
+	
+	public void drawTextRight(Graphics2D g, Sprite[] chars, String text, int x, int y)
+	{
+		int ex = 0;
+		for (int i = text.length() - 1;  i >= 0; i--)
+			chars[text.charAt(i) - 32].draw(g, x - ex++ * 8, y, cap);
 	}
 	
 	public void drawTitle(Graphics2D g, Sprite[] chars)
