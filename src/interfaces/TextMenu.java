@@ -3,6 +3,8 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 
+import java.util.Iterator;
+
 import graphics.Sprite;
 import inMain.Input;
 import inMain.State;
@@ -14,48 +16,51 @@ public class TextMenu extends FocusMenu{
 	private static final int cols = 20;
 	
 	private String text;
-	private ArrayList<String> pages;
-	private int pageCursor;
+	private ArrayList<String> entries;
+	private int pC;
+	private int head = 0;
+	
 	private int charTick;
+	private boolean scrolling;
 	
 	public TextMenu(String s)
 	{
 		super(32, 136, 192, 80, "Text");
 		text = s;
 		showName = false;
-		init();
 	}
 	
 	public void init()
 	{
+		head = 0;
 		charTick = 0;
-		pageCursor = 0;
-		pages = new ArrayList<String>(1);
+		pC = 0;
+		scrolling = true;
+		entries = new ArrayList<String>(1);
 		parse();
 	}
 	
 	//changes text to a format the drawing function can understand
 	public void parse()
 	{
-		String page = "";
-		int inline = 0;
+		String entry = "";
 		int chline = 0;
 		for (int i = 0; i < text.length(); i++)
 		{
 			//if new page
-			if (text.charAt(i) == '\\' || inline >= rows)
+			if (text.charAt(i) == '\\')
 			{
-				pages.add(page);
-				page = "";
+				entries.add(entry);
+				entries.add("\\");
+				entry = "";
 				chline = 0;
-				inline = 0;
 				continue;
 			}
 			//if newline
 			if (text.charAt(i) == '|')
 			{
-				page += '|';
-				inline++;
+				entries.add(entry);
+				entry = "";
 				chline = 0;
 				continue;
 			}
@@ -63,66 +68,96 @@ public class TextMenu extends FocusMenu{
 			//if space
 			if (text.charAt(i) == ' ') 
 			{
-				page += " ";
+				entry += " ";
 				chline++;
 				continue;
 			}
 			
 			//iterates through a word, checking for run off
-			for (int k = i; k < text.length() && text.charAt(k) != ' ' && text.charAt(k) != '\\'; k++)
+			boolean runoff = false;
+			for (int k = i; k < text.length() && text.charAt(k) != ' ' && text.charAt(k) != '\\' && text.charAt(k) != '|'; k++)
 			{
 				//finds run off line
-				if (chline + (k-i+1) > cols)
+				if (chline + (k-i+1) >= cols)
 				{
-					if (++inline >= rows)
-					{
-						pages.add(page);
-						page = "";
-						i--;
-						chline = 0;
-						inline = 0;
-						break;
-					}
-					page += '|';
+					entries.add(entry);
+					entry = "";
 					chline = 0;
+					runoff = true;
 					break;
 				}
-				
 			}
+			if (runoff)
+			{
+				i--;
+				continue;
+			}
+				
 			
 			//prints word
-			for (int k = i; k < text.length() && text.charAt(k) != ' ' && text.charAt(k) != '\\'; k++)
+			for (int k = i; k < text.length() && text.charAt(k) != '|' && text.charAt(k) != ' ' && text.charAt(k) != '\\'; k++)
 			{
-				page += text.charAt(k);
+				entry += text.charAt(k);
 				i++;
 				chline++;
 			}
 			i--;
 
 		}
-		pages.add(page);
+		entries.add(entry);
+		/*
+		for (String s : entries)
+		{
+			System.out.println(s);
+		} */
 	}
 	
 	
 	public void draw(Graphics2D g, Sprite[] chars)
 	{
 		super.draw(g, chars);
-		String[] thins = (pages.get(pageCursor)).split("\\|");
 		int xi = x + 8;
 		int yi = y + 8;
 		int lengths = 0;
-		for (String s : thins)
+		int inline = -1;
+		for (pC = head; pC <= entries.size() && lengths <= charTick; pC++)
 		{
-			if (charTick > lengths + s.length())
-				drawText(g, chars, s, xi, yi);
+			String s;
+			if (pC == entries.size())
+			{
+				s = " ";
+				scrolling = false;
+			}
 			else
-				drawText(g, chars, s.substring(0, charTick - lengths), xi, yi);
-			lengths += s.length();
-			if (lengths > charTick)
+				s = entries.get(pC);
+			if (s.compareTo("") == 0)
+				continue;
+			if (++inline > rows)
+			{
+				charTick -= entries.get(head).length();
+				lengths -= entries.get(head).length();
+				entries.set(head++, "");
+			}
+			//System.out.println(s);
+			if (s.compareTo("\\") == 0)
+			{
+				drawText(g, chars, "|", xi, yi + inline * 8);
+				scrolling = false;
 				break;
-			yi += 8;
+			}
+			if (charTick > lengths + s.length())
+				drawText(g, chars, s, xi, yi + inline * 8);
+			else
+				drawText(g, chars, s.substring(0, charTick - lengths), xi, yi + inline * 8);
+			lengths += s.length();
+			
 		}
-		
+		/*
+		drawText(g, chars, Integer.toString(pC) + " " + Integer.toString(lengths)
+				+ " " + Integer.toString(charTick) + " " + Integer.toString(head), xi, yi - 8);
+		for (String s : entries)
+			System.out.print("=" + s);
+		System.out.println(); */
 	}
 	
 	public boolean execute()
@@ -133,22 +168,25 @@ public class TextMenu extends FocusMenu{
 
 	public void input() 
 	{
-		
-		if (Input.getInput().getKeys()[4])
+		if (Input.getInput().getKeys()[4] && !scrolling)
 		{
 			Input.getInput().getKeys()[4] = false;
-			if (++pageCursor == pages.size())
+			if (pC >= entries.size())
 			{	
-				pageCursor = 0;
+				pC = 0;
 				close();
 			}
-			
+			else
+			{
+				entries.set(pC, " ");
+				scrolling = true;
+			}
 		}
 	}
 	
 	public boolean update(long delta)
 	{
-		if (open)
+		if (open && scrolling)
 			charTick++;
 		return super.update(delta);
 	}

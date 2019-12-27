@@ -18,7 +18,9 @@ public class CommandMenu extends SelectionMenu{
 		}
 		
 		menu[0][1] = new StatusMenu();
-		menu[1][3] = new TextMenu("testing text");
+		menu[1][3] = new TextMenu("just great perfect yes indeed you will be a powerful textbox"
+				+ "\\another awaits you, in the dagoah system"
+				+ "\\stop messing this up it's easy!!!");
 		return menu;
 	}
 
