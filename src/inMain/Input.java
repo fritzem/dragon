@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 
 import graphics.Display;
 import interfaces.CommandMenu;
+import interfaces.FrameCounterMenu;
 import interfaces.MiniStatusMenu;
 
 public class Input {
@@ -38,8 +39,10 @@ public class Input {
 					keys[5] = true;
 				}
 				if (e.getKeyCode() == KeyEvent.VK_1) { 
-					System.out.println("HEY");
 					new MiniStatusMenu().execute();
+				}
+				if (e.getKeyCode() == KeyEvent.VK_2) {
+					new FrameCounterMenu().execute();
 				}
 				if (e.getKeyCode() == KeyEvent.VK_C) {
 					keys[6] = true;

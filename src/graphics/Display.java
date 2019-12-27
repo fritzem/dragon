@@ -80,9 +80,6 @@ public class Display extends Canvas{
 		
 		drawInterface();
 		
-		g.setColor(Color.YELLOW);
-		g.drawString(Integer.toString(State.getFPS()), 20, 20);
-		
 	}
 	
 	public void drawInterface()
