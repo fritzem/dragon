@@ -13,7 +13,7 @@ import inMain.focusable;
 public class TextMenu extends FocusMenu{
 	
 	private static final int rows = 7;
-	private static final int cols = 20;
+	private static final int cols = 23;
 	
 	private String text;
 	private ArrayList<String> entries;
@@ -50,7 +50,7 @@ public class TextMenu extends FocusMenu{
 			//if new page
 			if (text.charAt(i) == '\\')
 			{
-				entries.add(entry);
+				entries.add(entry.trim());
 				entries.add("\\");
 				entry = "";
 				chline = 0;
@@ -59,7 +59,7 @@ public class TextMenu extends FocusMenu{
 			//if newline
 			if (text.charAt(i) == '|')
 			{
-				entries.add(entry);
+				entries.add(entry.trim());
 				entry = "";
 				chline = 0;
 				continue;
@@ -80,7 +80,7 @@ public class TextMenu extends FocusMenu{
 				//finds run off line
 				if (chline + (k-i+1) >= cols)
 				{
-					entries.add(entry);
+					entries.add(entry.trim());
 					entry = "";
 					chline = 0;
 					runoff = true;
@@ -104,11 +104,11 @@ public class TextMenu extends FocusMenu{
 			i--;
 
 		}
-		entries.add(entry);
+		entries.add(entry.trim());
 		/*
 		for (String s : entries)
 		{
-			System.out.println(s);
+			System.out.println(s + 8);
 		} */
 	}
 	
