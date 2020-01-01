@@ -16,16 +16,18 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import events.Event;
+import events.EventBuilder;
+
 public class Map {
 	
 	public int[][] map;
-	public String[][][] events;
+	public boolean[][] mapColl;
+	public Event[][] events;
 	
 	private int width;
 	private int height;
 	
-	
-	public boolean[][] mapColl;
 	
 	public Map()
 	{
@@ -45,8 +47,10 @@ public class Map {
 			Element e = mapDoc.getDocumentElement();
 			width = Integer.parseInt(e.getAttribute("width"));
 			height = Integer.parseInt(e.getAttribute("height"));
+			
 			map = new int[width][height];
 			mapColl = new boolean[width][height];
+			events = new Event[width][height];
 			
 			//gathers tile information
 			NodeList tiles = mapDoc.getElementsByTagName("data");
@@ -58,10 +62,10 @@ public class Map {
 			for (int i = 0; i < events.getLength(); i++)
 			{
 				Element event = (Element) events.item(i);
-				System.out.println("Event at " 
-						+ (int) Double.parseDouble(event.getAttribute("x")) / tileSize 
-						+ " " 
-						+ (int) Double.parseDouble(event.getAttribute("y")) / tileSize);
+				int locX = (int) Double.parseDouble(event.getAttribute("x")) / tileSize;
+				int locY = (int) Double.parseDouble(event.getAttribute("y")) / tileSize;
+				this.events[locX][locY] = EventBuilder.buildEvent(event);
+				System.out.println("Event at " + locX + " " + locY);
 			}
 			
 			
@@ -71,76 +75,13 @@ public class Map {
 			System.out.println("Failed to create map " + filename);
 		}
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		/**
-		Scanner sc;
-		try {
-			sc = new Scanner(new File("data/" + worldName + "/" + filename + ".tmx"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return;
-		}
-		int x = Integer.parseInt(sc.next());
-		int y = Integer.parseInt(sc.next());
-		map = new int[x][y];
-		mapColl = new boolean[x][y];
-		sc.nextLine();
-		String line;
-		int index = 0;
-		while (sc.hasNext())
-		{
-			line = sc.nextLine();
-			String[] arrOfTiles = line.split(",");
-			for (int i = 0; i < arrOfTiles.length; i++)
-			{
-				map[i][index] = Integer.parseInt(arrOfTiles[i]) - 1;
-				switch (Integer.parseInt(arrOfTiles[i]))
-				{
-				case 4:
-				case 5:
-				case 7:
-				case 8:
-				case 16:
-				case 17: 
-				case 19:
-				case 20:
-				case 25:
-				case 26: 
-				case 27:
-				case 28:
-				case 29:
-				case 31:
-				case 32:
-				case 33:
-				case 34:
-				case 35:
-				case 37:
-				case 38:
-				case 39:
-				case 40:
-				case 41:
-				case 43:
-				case 44:
-				case 45:
-				case 46:
-				case 47:
-					mapColl[i][index] = false;
-					break;
-				default:
-					mapColl[i][index] = true;
-				}
-				
-			}
-			index++;
-		} */
+
+	}
+	
+	public void queryEvent(int x, int y)
+	{
+		if (events[x][y] != null)
+			events[x][y].activate();
 	}
 	
 	private void encodeTiles(String s)

@@ -3,7 +3,7 @@ package inMain;
 import interfaces.CommandMenu;
 import theWorld.State;
 
-public class Player implements focusable{
+public class Player implements focusable, updatable{
 	
 	
 	
@@ -30,6 +30,7 @@ public class Player implements focusable{
 		slideY = 0;
 		dir = 3;
 		State.setPlayer(this);
+		addUpdate();
 		instance = this;
 	}
 	
@@ -98,6 +99,14 @@ public class Player implements focusable{
 		}
 		return 0;
 	}
+	public int getSlideX()
+	{
+		return (int) slideX;
+	}
+	public int getSlideY()
+	{
+		return (int) slideY;
+	}
 	public void input()
 	{
 		if (moving)
@@ -155,5 +164,11 @@ public class Player implements focusable{
 		}
 		
 		
+	}
+
+	public boolean update(long delta) {
+		slideX();
+		slideY();
+		return false;
 	}
 }

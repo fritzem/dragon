@@ -107,8 +107,8 @@ public class Display extends Canvas{
 		int tX = loc[0] - 7;
 		int tY = loc[1] - 6;
 		
-		int slideX = Player.getInstance().slideX();
-		int slideY = Player.getInstance().slideY();
+		int slideX = Player.getInstance().getSlideX();
+		int slideY = Player.getInstance().getSlideY();
 		if (slideX == 0 && slideY == 0)
 		{
 			Player.getInstance().doneMoving();
