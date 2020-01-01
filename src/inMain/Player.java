@@ -1,6 +1,7 @@
 package inMain;
 
 import interfaces.CommandMenu;
+import theWorld.State;
 
 public class Player implements focusable{
 	

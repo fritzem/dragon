@@ -5,7 +5,7 @@ import java.awt.Graphics2D;
 
 import graphics.Sprite;
 import inMain.Input;
-import inMain.State;
+import theWorld.State;
 
 public abstract class SelectionMenu extends FocusMenu{
 	

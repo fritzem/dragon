@@ -6,9 +6,9 @@ import java.awt.Graphics2D;
 
 import graphics.Sprite;
 import inMain.Input;
-import inMain.State;
 import inMain.focusable;
 import inMain.updatable;
+import theWorld.State;
 
 public abstract class Menu implements updatable{
 	

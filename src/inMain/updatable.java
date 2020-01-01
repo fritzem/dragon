@@ -1,5 +1,7 @@
 package inMain;
 
+import theWorld.State;
+
 public interface updatable {
 	
 	default public void addUpdate()

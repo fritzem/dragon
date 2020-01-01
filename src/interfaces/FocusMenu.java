@@ -5,8 +5,8 @@ import java.awt.Graphics;
 
 import graphics.Sprite;
 import inMain.Input;
-import inMain.State;
 import inMain.focusable;
+import theWorld.State;
 
 public abstract class FocusMenu extends Menu implements focusable {
 	

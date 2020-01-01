@@ -12,14 +12,14 @@ import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
 import inMain.Player;
-import inMain.State;
 import interfaces.Menu;
 import interfaces.TextMenu;
+import theWorld.Map;
+import theWorld.State;
 
 public class Display extends Canvas{
 	
 	private JFrame display;
-	private State state;
 	
 	private Sprite[] characters;
 	private Sprite[] tiles;
@@ -44,8 +44,6 @@ public class Display extends Canvas{
 		setIgnoreRepaint(true);
 		createBufferStrategy(2);
 		buffer = getBufferStrategy();
-		
-		state = State.getInstance();
 		
 		initSprites();
 		
@@ -104,8 +102,8 @@ public class Display extends Canvas{
 		g.fillRect(0, 0, getWidth(), getHeight());
 		int xTILES = 17;
 		int yTILES = 15;
-		Map m = state.getMap();
-		int[] loc = state.getPlayer().getLocation();
+		Map m = State.getMap();
+		int[] loc = State.getPlayer().getLocation();
 		int tX = loc[0] - 7;
 		int tY = loc[1] - 6;
 		

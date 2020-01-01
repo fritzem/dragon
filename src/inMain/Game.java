@@ -2,9 +2,10 @@ package inMain;
 import javax.swing.*;
 
 import graphics.Display;
-import graphics.Map;
 import interfaces.MiniStatusMenu;
 import interfaces.TextMenu;
+import theWorld.Map;
+import theWorld.State;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -15,6 +16,8 @@ public class Game {
 	private Display display;
 	private Input input;
 	private State state;
+	
+	public static int frames;
 	
 	private Boolean active;
 	public static void main(String[] args) {
@@ -27,8 +30,7 @@ public class Game {
 		display = new Display();
 		input = new Input(display);
 		
-		
-		State.setMap(new Map("dragon"));
+		frames = 0;
 		
 		Player p = Player.getInstance();
 		
@@ -74,7 +76,7 @@ public class Game {
 			
 			if (System.currentTimeMillis() >= secondTime + 1000)
 			{
-				State.setFPS(frames);
+				this.frames = frames;
 				frames = 0;
 				secondTime += 1000;
 			}

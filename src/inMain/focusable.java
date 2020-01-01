@@ -1,4 +1,7 @@
 package inMain;
+
+import theWorld.State;
+
 public interface focusable {
 
 	default public void addFocus()

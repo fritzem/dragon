@@ -8,6 +8,7 @@ import graphics.Display;
 import interfaces.CommandMenu;
 import interfaces.FrameCounterMenu;
 import interfaces.MiniStatusMenu;
+import theWorld.State;
 
 public class Input {
 	private static Input inputState;

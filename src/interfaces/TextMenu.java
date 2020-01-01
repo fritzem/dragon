@@ -7,8 +7,8 @@ import java.util.Iterator;
 
 import graphics.Sprite;
 import inMain.Input;
-import inMain.State;
 import inMain.focusable;
+import theWorld.State;
 
 public class TextMenu extends FocusMenu{
 	

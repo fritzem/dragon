@@ -3,7 +3,8 @@ package interfaces;
 import java.awt.Graphics2D;
 
 import graphics.Sprite;
-import inMain.State;
+import inMain.Game;
+import theWorld.State;
 
 public class FrameCounterMenu extends Menu {
 
@@ -17,7 +18,7 @@ public class FrameCounterMenu extends Menu {
 	{
 		super.draw(g, chars);
 		
-		drawText(g, chars, Integer.toString(State.getFPS()), x + 8, y + 8);
+		drawText(g, chars, Integer.toString(Game.frames), x + 8, y + 8);
 	}
 
 }
