@@ -37,7 +37,7 @@ public class Display extends Canvas{
 		scale = 2;
 		this.setSize(256 * scale ,224 * scale);
 		display.add(this);
-		display.setTitle("Shell");
+		display.setTitle("Dragon Warrior");
 		display.pack();
 		display.setVisible(true);
 		display.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -120,7 +120,7 @@ public class Display extends Canvas{
 			{
 				//off the grid?
 				if (tX + i < 0 || tX + i >= m.map.length || tY + k < 0 || tY + k >= (m.map[0].length))
-					tiles[48].draw(g,  (i% xTILES) * size + slideX + 8,  k * size + slideY + 8);
+					tiles[m.getBackground()].draw(g,  (i% xTILES) * size + slideX + 8,  k * size + slideY + 8);
 				else
 					tiles[m.map[tX + i][tY + k]].draw(g, (i % xTILES) * size + slideX + 8, k * size + slideY + 8);
 			}

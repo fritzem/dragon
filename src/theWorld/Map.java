@@ -30,6 +30,7 @@ public class Map {
 	
 	private String name;
 	
+	private int background;
 	
 	public Map()
 	{
@@ -40,10 +41,12 @@ public class Map {
 		map[10][10] = 26;
 		
 		name = "nullland";
+		background = 23;
 	}
 	
 	public Map(String filename, String worldName)
 	{
+		
 		File file = new File("data/" + worldName + "/" + filename + ".tmx");
 		name = filename;
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -59,6 +62,13 @@ public class Map {
 			map = new int[width][height];
 			mapColl = new boolean[width][height];
 			events = new Event[width][height];
+			
+			//background info, if not found, set to black
+			String background = findAttribute(e, "background");
+			if (background != null)
+				this.background = Integer.parseInt(background);
+			else
+				this.background = 23;
 			
 			//gathers tile information
 			NodeList tiles = mapDoc.getElementsByTagName("data");
@@ -143,9 +153,28 @@ public class Map {
 		}
 	}
 	
+	public String findAttribute(Element event, String find)
+	{
+		NodeList properties = event.getElementsByTagName("property");
+
+		for (int i = 0; i < properties.getLength(); i++) 
+		{
+			if (((Element)properties.item(i)).getAttribute("name").compareTo(find) == 0)
+			{
+				return (((Element)properties.item(i)).getAttribute("value"));
+			}
+		}
+		return null;
+	}
+	
 	public int[][] getMap()
 	{
 		return null;
+	}
+	
+	public int getBackground()
+	{
+		return background;
 	}
 	
 	public String getName()

@@ -6,11 +6,6 @@ import theWorld.World;
 
 public class Player implements focusable, updatable{
 	
-	
-	
-	
-	
-	
 	//Movement information
 	private static Player instance;
 	private int x;
@@ -170,7 +165,8 @@ public class Player implements focusable, updatable{
 	public boolean update(long delta) {
 		slideX();
 		slideY();
-		World.queryEvent(x, y);
+		if (slideX == 0 && slideY == 0)
+			World.queryEvent(x, y);
 		return false;
 	}
 }

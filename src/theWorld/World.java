@@ -13,6 +13,7 @@ public class World {
 		maps.add(new Map("dragon-E", name));
 		maps.add(new Map("test1", name));
 		maps.add(new Map());
+		maps.add(new Map("town", name));
 		
 		index = 0;
 	}

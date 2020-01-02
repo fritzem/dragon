@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="25" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="16">
+<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="25" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="19">
  <tileset firstgid="1" source="overworldSprites.tsx"/>
  <layer id="1" name="World" width="25" height="25">
+  <properties>
+   <property name="background" value="48"/>
+  </properties>
   <data encoding="csv">
 49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,50,50,50,50,49,
 49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,56,27,28,27,29,52,
@@ -33,9 +36,9 @@
  <objectgroup id="5" name="Events">
   <object id="7" x="103" y="139.5">
    <properties>
-    <property name="dest" value="test1"/>
-    <property name="destX" value="3"/>
-    <property name="destY" value="80"/>
+    <property name="dest" value="town"/>
+    <property name="destX" value="0"/>
+    <property name="destY" value="10"/>
     <property name="type" value="warp"/>
    </properties>
    <point/>
@@ -58,9 +61,18 @@
   </object>
   <object id="15" x="151.5" y="119">
    <properties>
-    <property name="dest" value="nullland"/>
-    <property name="destX" value="20"/>
-    <property name="destY" value="30"/>
+    <property name="dest" value="dragon-E"/>
+    <property name="destX" value="22"/>
+    <property name="destY" value="2"/>
+    <property name="type" value="warp"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="16" x="231.5" y="169">
+   <properties>
+    <property name="dest" value="dragon-E"/>
+    <property name="destX" value="19"/>
+    <property name="destY" value="19"/>
     <property name="type" value="warp"/>
    </properties>
    <point/>
