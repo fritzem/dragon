@@ -2,6 +2,7 @@ package inMain;
 
 import interfaces.CommandMenu;
 import theWorld.State;
+import theWorld.World;
 
 public class Player implements focusable, updatable{
 	
@@ -169,6 +170,7 @@ public class Player implements focusable, updatable{
 	public boolean update(long delta) {
 		slideX();
 		slideY();
+		World.queryEvent(x, y);
 		return false;
 	}
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="25" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="12">
+<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="25" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="16">
  <tileset firstgid="1" source="overworldSprites.tsx"/>
  <layer id="1" name="World" width="25" height="25">
   <data encoding="csv">
@@ -33,13 +33,35 @@
  <objectgroup id="5" name="Events">
   <object id="7" x="103" y="139.5">
    <properties>
-    <property name="warp" value="test"/>
+    <property name="dest" value="test1"/>
+    <property name="destX" value="3"/>
+    <property name="destY" value="80"/>
+    <property name="type" value="warp"/>
    </properties>
    <point/>
   </object>
   <object id="11" x="71.5" y="247">
    <properties>
-    <property name="warp" value="dragon-E"/>
+    <property name="message" value="Hello!"/>
+    <property name="type" value="print"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="12" x="198" y="165">
+   <properties>
+    <property name="type" value="print"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="13" x="232" y="136">
+   <point/>
+  </object>
+  <object id="15" x="151.5" y="119">
+   <properties>
+    <property name="dest" value="nullland"/>
+    <property name="destX" value="20"/>
+    <property name="destY" value="30"/>
+    <property name="type" value="warp"/>
    </properties>
    <point/>
   </object>

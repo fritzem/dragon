@@ -28,16 +28,24 @@ public class Map {
 	private int width;
 	private int height;
 	
+	private String name;
+	
 	
 	public Map()
 	{
+		width = 100;
+		height = 100;
 		map = new int[100][100];
+		events = new Event[100][100];
 		map[10][10] = 26;
+		
+		name = "nullland";
 	}
 	
 	public Map(String filename, String worldName)
 	{
 		File file = new File("data/" + worldName + "/" + filename + ".tmx");
+		name = filename;
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		try {
 			DocumentBuilder builder = factory.newDocumentBuilder();
@@ -80,8 +88,13 @@ public class Map {
 	
 	public void queryEvent(int x, int y)
 	{
-		if (events[x][y] != null)
+		if (validLocation(x,y) && events[x][y] != null)
 			events[x][y].activate();
+	}
+	
+	public boolean validLocation(int x, int y)
+	{
+		return (x >= 0 && y >= 0 && x < width && y < height);
 	}
 	
 	private void encodeTiles(String s)
@@ -133,5 +146,10 @@ public class Map {
 	public int[][] getMap()
 	{
 		return null;
+	}
+	
+	public String getName()
+	{
+		return name;
 	}
 }
