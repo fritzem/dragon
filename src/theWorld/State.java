@@ -14,6 +14,7 @@ public class State {
 	//Generic Arrays
 	private static Stack<focusable> focus;
 	private static ArrayList<updatable> updates;
+	private static ArrayList<updatable> tempUpdates;
 	public static ArrayList<Menu> menus;
 	
 	private static Iterator<updatable> upIt;
@@ -30,6 +31,7 @@ public class State {
 	{
 		focus = new Stack<>();
 		updates = new ArrayList<updatable>();
+		tempUpdates = new ArrayList<updatable>();
 		menus = new ArrayList<Menu>();
 		fps = 0;
 		
@@ -131,7 +133,7 @@ public class State {
 	 */
 	public static void addUpdate(updatable update)
 	{
-		updates.add(update);
+		tempUpdates.add(update);
 	}
 	
 	public static void removeUpdate(updatable update)
@@ -142,6 +144,7 @@ public class State {
 	
 	public static void update()
 	{
+		updateArraylist();
 		upIt = updates.iterator();
 		while (upIt.hasNext())
 		{
@@ -149,5 +152,15 @@ public class State {
 			if (u.update(0l))
 				upIt.remove();
 		}
+	}
+	
+	public static void updateArraylist()
+	{
+		tempUpdates.trimToSize();
+		for (updatable u : tempUpdates)
+		{
+			updates.add(u);
+		}
+		tempUpdates = new ArrayList<updatable>();
 	}
 }

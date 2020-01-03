@@ -67,7 +67,6 @@ public class Display extends Canvas{
 	{
 		//trash testers
 		
-		scale = 2;
 		g.scale(scale, scale);
 		
 		//Draw the world

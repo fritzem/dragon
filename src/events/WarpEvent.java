@@ -3,6 +3,7 @@ package events;
 import org.w3c.dom.Element;
 
 import inMain.Player;
+import scripts.WarpScript;
 import theWorld.World;
 
 public class WarpEvent implements Event{
@@ -16,8 +17,7 @@ public class WarpEvent implements Event{
 		destY = Integer.parseInt(findAttribute(event, "destY"));
 	}
 	public void activate() {
-		World.setMap(dest);
-		Player.getInstance().setLocation(destX,destY);
+		new WarpScript(dest, destX, destY);
 	}
 
 }

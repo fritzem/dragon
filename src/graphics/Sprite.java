@@ -3,6 +3,7 @@ package graphics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.awt.image.BufferedImageOp;
 import java.awt.image.RescaleOp;
@@ -51,10 +52,14 @@ public class Sprite {
 	{
 		
 		BufferedImage image = null;
-		RescaleOp contrast = new RescaleOp(1f, 0, null);
+		RescaleOp contrast = new RescaleOp(0.9f, 0, (RenderingHints) null);
 		RescaleOp brightness = new RescaleOp(0.6f, 0, null);
 		
-		//image = contrast.filter(sprite, null);
+		float[] factors = new float[] {1.45f, 1.45f, 1.45f}; 
+		float[] offsets = new float[] {0.0f, 150.0f, 0.0f}; 
+	    RescaleOp rop = new RescaleOp(factors, offsets, null); 
+		
+		//BufferedImage img = rop.filter(sprite, null);
 		
 		//g.drawImage(sprite, x, y, sprite.getWidth(), sprite.getHeight(), null);
 		g.drawImage(sprite, x, y, null);
