@@ -10,7 +10,7 @@ import inMain.focusable;
 import inMain.updatable;
 import theWorld.State;
 
-public abstract class Menu implements updatable{
+public abstract class Menu implements updatable, MenuItem{
 	
 	protected int ticks;
 	protected int cap;
@@ -122,5 +122,9 @@ public abstract class Menu implements updatable{
 		return false;
 	}
 	
+	public String getName()
+	{
+		return name;
+	}
 	
 }

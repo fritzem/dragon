@@ -9,18 +9,42 @@ import theWorld.State;
 
 public abstract class SelectionMenu extends FocusMenu{
 	
-	private Menu[][] list;
+	protected MenuItem[][] list;
+	private int listSizeX;
+	private int listSizeY;
 	private int cursor;
 	
+	//How far from the top the list begins
+	protected int yOffset;
 	
-	public SelectionMenu(int x, int y, int width, int height, String name) {
+	
+	public SelectionMenu(int x, int y, int width, int height, int listSizeX, int listSizeY, String name) {
 		super(x, y, width, height, name);
+		this.listSizeX = listSizeX;
+		this.listSizeY = listSizeY;
+		yOffset = 16;
 		cursor = 0;
-		this.list = getMenu();
-		
+		initMenu();
+		getMenu();
 	}
 	
-	public abstract Menu[][] getMenu();
+	//Initializes entries with null values
+	public void initMenu()
+	{
+		MenuItem[][] menu = new MenuItem[listSizeX][listSizeY];
+		
+		for (int i = 0; i < menu.length; i++)
+		{
+			for (int j = 0; j < menu[0].length; j++)
+			{
+				menu[i][j] = new NullItem();
+			}
+		}
+		list = menu;
+	}
+	
+	//Implementations of the selection menu initialize their selections with this method
+	public abstract void getMenu();
 	
 	public void draw(Graphics2D g, Sprite[] chars)
 	{
@@ -29,11 +53,11 @@ public abstract class SelectionMenu extends FocusMenu{
 		{
 			for (int j = 0; j < list[0].length; j++)
 			{
-				drawText(g, chars, list[i][j].name, i * 64 + x + 16, j * 16 + y + 16);
+				drawText(g, chars, list[i][j].getName(), i * 64 + x + 16, j * 16 + y + yOffset);
 			}
 		}
 		
-		chars[91].draw(g, x + 8 + cursor / list[0].length * 64, y + 16 + (cursor % list[0].length) * 16, cap);
+		chars[91].draw(g, x + 8 + cursor / list[0].length * 64, y + yOffset + (cursor % list[0].length) * 16, cap);
 	}
 
 	public void input()

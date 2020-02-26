@@ -1,17 +1,12 @@
 package interfaces;
 
-public class NullItem extends Menu{
-
-	public NullItem() {
-		super(1, 1, 1, 1, "Null");
-	}
-	
+public class NullItem implements MenuItem{	
 	public boolean execute() {
 		return false;
 	}
 
-	public void input() {
-		
+	public String getName() {
+		return "Null";
 	}
 
 }
