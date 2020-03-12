@@ -7,6 +7,7 @@ import java.awt.image.BufferedImage;
 import java.awt.image.RescaleOp;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
@@ -14,6 +15,7 @@ import javax.swing.JFrame;
 import inMain.Player;
 import interfaces.Menu;
 import interfaces.TextMenu;
+import theWorld.Entity;
 import theWorld.Map;
 import theWorld.State;
 
@@ -23,7 +25,7 @@ public class Display extends Canvas{
 	
 	private Sprite[] characters;
 	private Sprite[] tiles;
-	private Sprite[] player;
+	private Sprite[] entities;
 	private int size;
 	private int scale;
 	
@@ -75,6 +77,8 @@ public class Display extends Canvas{
 		//Draw the player
 		drawPlayer();
 		
+		drawEntities();
+		
 		drawInterface();
 		
 	}
@@ -82,9 +86,7 @@ public class Display extends Canvas{
 	public void drawInterface()
 	{
 		for (Menu m : State.menus)
-		{
 			m.draw(g, characters);
-		}
 	}
 	
 	public void drawPlayer()
@@ -92,7 +94,18 @@ public class Display extends Canvas{
 		int test = 0;
 		if (System.currentTimeMillis() % 550 > 275)
 			test = 1;
-		player[Player.getInstance().getDir() * 2 + test].draw(g, 7 * 16 + 8, 6 * 16 + 8);
+		entities[Player.getInstance().getDir() * 2 + test].draw(g, 7 * 16 + 8, 6 * 16 + 8);
+	}
+	
+	public void drawEntities()
+	{
+		ArrayList<Entity> entities = State.getMap().getEntities();
+		int[] loc = State.getPlayer().getLocation();
+		for (Entity i : entities)
+		{
+			this.entities[64 + anim()].draw(g, (i.getX() - loc[0] + 7) * 16 + 8 + Player.getInstance().getSlideX(), 
+									 (i.getY() - loc[1] + 6) * 16 + 8 + Player.getInstance().getSlideY());
+		}
 	}
 	
 	public void drawMap()
@@ -143,13 +156,8 @@ public class Display extends Canvas{
 		//tile sprites
 		tiles = readSheet("overworldSprites", 16, 1);
 		
+		entities = readSheet("entitySprites", 16, 0);
 		//entity sprites
-		player = new Sprite[8];
-		Sprite playerSheet = new Sprite("entitySprites");
-		for (int i = 0; i < 8; i++)
-		{
-			player[i] = new Sprite(playerSheet, (i * 16), 54, 16, 16);
-		}
 	}
 	
 	public Sprite[] readSheet(String name, int sprSize, int spacing)
@@ -166,6 +174,14 @@ public class Display extends Canvas{
 		}
 		size -= spacing;
 		return arr;
+	}
+	
+	public int anim()
+	{
+		int test = 0;
+		if (System.currentTimeMillis() % 550 > 275)
+			test = 1;
+		return test;
 	}
 	
 	public JFrame getFrame()

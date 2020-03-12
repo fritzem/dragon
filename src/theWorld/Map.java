@@ -2,6 +2,7 @@ package theWorld;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import javax.imageio.ImageIO;
@@ -24,6 +25,8 @@ public class Map {
 	public int[][] map;
 	public boolean[][] mapColl;
 	public Event[][] events;
+	
+	private ArrayList<Entity> entities;
 	
 	private int width;
 	private int height;
@@ -62,6 +65,7 @@ public class Map {
 			map = new int[width][height];
 			mapColl = new boolean[width][height];
 			events = new Event[width][height];
+			entities = new ArrayList<Entity>();
 			
 			//background info, if not found, set to black
 			String background = findAttribute(e, "background");
@@ -74,9 +78,13 @@ public class Map {
 			NodeList tiles = mapDoc.getElementsByTagName("data");
 			encodeTiles(tiles.item(0).getTextContent());
 			
-			//gathers event information
+			
+			//begin gathering layered metadata
 			int tileSize = Integer.parseInt(e.getAttribute("tilewidth"));
-			NodeList events = mapDoc.getElementsByTagName("object");
+			NodeList groups = mapDoc.getElementsByTagName("objectgroup");
+				
+			//gathers event information
+			NodeList events = ((Element) groups.item(0)).getElementsByTagName("object"); //replace these, they suck
 			for (int i = 0; i < events.getLength(); i++)
 			{
 				Element event = (Element) events.item(i);
@@ -85,7 +93,17 @@ public class Map {
 				this.events[locX][locY] = EventBuilder.buildEvent(event);
 				System.out.println("Event at " + locX + " " + locY);
 			}
-			
+
+			//gathers entity information
+			NodeList entities = ((Element) groups.item(1)).getElementsByTagName("object");
+			for (int i = 0; i < entities.getLength(); i++)
+			{
+				Element entity = (Element) entities.item(i);
+				int locX = (int) Double.parseDouble(entity.getAttribute("x")) / tileSize;
+				int locY = (int) Double.parseDouble(entity.getAttribute("y")) / tileSize;
+				this.entities.add(new Entity(locX, locY));
+				System.out.println("Entity at " + locX + " " + locY);
+			}
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -104,7 +122,18 @@ public class Map {
 	
 	public boolean validLocation(int x, int y)
 	{
-		return (x >= 0 && y >= 0 && x < width && y < height);
+		//limits you to the map
+		//return (x >= 0 && y >= 0 && x < width && y < height);
+		//limits you to col tiles
+		/*
+		if (x > 0 && y > 0 && (y + 1 < map.map[0].length) && (x + 1 < map.map.length))
+			return (!map.mapColl[x][y]); */
+		for (Entity i : entities)
+		{
+			if (i.getX() == x && i.getY() == y)
+				return false;
+		}
+		return true;
 	}
 	
 	private void encodeTiles(String s)
@@ -180,5 +209,10 @@ public class Map {
 	public String getName()
 	{
 		return name;
+	}
+	
+	public ArrayList<Entity> getEntities()
+	{
+		return entities;
 	}
 }

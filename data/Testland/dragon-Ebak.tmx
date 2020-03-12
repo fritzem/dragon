@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="25" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="25">
- <tileset firstgid="1" source="../../resources/overworldSprites.tsx"/>
- <tileset firstgid="361" source="../../resources/entitySprites.tsx"/>
+<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="25" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="19">
+ <tileset firstgid="1" source="overworldSprites.tsx"/>
  <layer id="1" name="World" width="25" height="25">
   <properties>
    <property name="background" value="48"/>
@@ -77,13 +76,6 @@
     <property name="type" value="warp"/>
    </properties>
    <point/>
-  </object>
- </objectgroup>
- <objectgroup id="9" name="Entities">
-  <object id="24" gid="417" x="194.333" y="63" width="13.3333" height="12">
-   <properties>
-    <property name="type" value="npc"/>
-   </properties>
   </object>
  </objectgroup>
 </map>

@@ -72,11 +72,7 @@ public class State {
 	
 	public static boolean validSpot(int x, int y)
 	{
-		return true;
-		/*
-		if (x > 0 && y > 0 && (y + 1 < map.map[0].length) && (x + 1 < map.map.length))
-			return (!map.mapColl[x][y]);
-		return false; */
+		return world.getMap().validLocation(x, y);
 	}
 	
 	
