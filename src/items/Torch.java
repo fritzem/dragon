@@ -9,9 +9,8 @@ public class Torch extends Item {
 		super("Torch");
 	}
 	
-	public boolean execute()
+	public void function()
 	{
 		new TextMenu("A torch can be used only in dark places.").execute();
-		return false;
 	}
 }

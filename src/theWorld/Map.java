@@ -19,6 +19,7 @@ import org.xml.sax.SAXException;
 
 import events.Event;
 import events.EventBuilder;
+import interfaces.TextMenu;
 
 public class Map {
 	
@@ -101,7 +102,7 @@ public class Map {
 				Element entity = (Element) entities.item(i);
 				int locX = (int) Double.parseDouble(entity.getAttribute("x")) / tileSize;
 				int locY = (int) Double.parseDouble(entity.getAttribute("y")) / tileSize;
-				this.entities.add(new Entity(locX, locY));
+				this.entities.add(new Entity(locX, locY, new TextMenu("Hello!")));
 				System.out.println("Entity at " + locX + " " + locY);
 			}
 			
@@ -214,5 +215,18 @@ public class Map {
 	public ArrayList<Entity> getEntities()
 	{
 		return entities;
+	}
+	
+	public void talk(int x, int y)
+	{
+		for (Entity e : entities)
+		{
+			if (e.getX() == x && e.getY() == y)
+			{
+				e.talk();
+				return;
+			}
+		}
+		new TextMenu("There is no one there.").execute();
 	}
 }

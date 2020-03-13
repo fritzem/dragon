@@ -12,7 +12,7 @@ public class Player implements focusable, updatable{
 	private int y;
 	private double slideX;
 	private double slideY;
-	private int dir;
+	private Direction dir;
 	private boolean moving;
 	private double speed;
 	
@@ -24,7 +24,7 @@ public class Player implements focusable, updatable{
 		y = 10;
 		slideX = 0;
 		slideY = 0;
-		dir = 3;
+		dir = Direction.DOWN;
 		State.setPlayer(this);
 		addUpdate();
 		instance = this;
@@ -52,7 +52,7 @@ public class Player implements focusable, updatable{
 	{
 		return new int[] {x, y};
 	}
-	public int getDir()
+	public Direction getDir()
 	{
 		return dir;
 	}
@@ -116,7 +116,7 @@ public class Player implements focusable, updatable{
 		}
 		if (input.getKeys()[0])
 		{
-			dir = 2;
+			dir = Direction.UP;
 			if (State.validSpot(x, y-1))
 			{
 				moving = true;
@@ -127,7 +127,7 @@ public class Player implements focusable, updatable{
 		}
 		else if (Input.getInput().getKeys()[1])
 		{
-			dir = 1;
+			dir = Direction.LEFT;
 			if (State.validSpot(x-1, y))
 			{
 				moving = true;
@@ -138,7 +138,7 @@ public class Player implements focusable, updatable{
 		}
 		else if (Input.getInput().getKeys()[2])
 		{
-			dir = 0;
+			dir = Direction.DOWN;
 			if (State.validSpot(x, y+1))
 			{
 				moving = true;
@@ -149,7 +149,7 @@ public class Player implements focusable, updatable{
 		}
 		else if (Input.getInput().getKeys()[3])
 		{
-			dir = 3;
+			dir = Direction.RIGHT;
 			//if valid move
 			if (State.validSpot(x+1,y))
 			{
@@ -160,6 +160,11 @@ public class Player implements focusable, updatable{
 		}
 		
 		
+	}
+	
+	public int[] getFaceBlock()
+	{
+		return new int[] {x + dir.xOff, y + dir.yOff};
 	}
 
 	public boolean update(long delta) {

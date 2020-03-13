@@ -1,5 +1,7 @@
 package interfaces;
 
+import actions.Talk;
+
 public class CommandMenu extends SelectionMenu{
 	
 	public CommandMenu() {
@@ -7,7 +9,7 @@ public class CommandMenu extends SelectionMenu{
 	}
 
 	public void getMenu() {
-		
+		list[0][0] = new Talk();
 		list[0][1] = new StatusMenu();
 		list[1][3] = new TextMenu("just great perfect yes indeed you will be a powerful textbox"
 				+ "\\another awaits you, in the dagoah system"

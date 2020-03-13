@@ -9,8 +9,11 @@ public abstract class Item implements MenuItem{
 		this.name = name;
 	}
 	public boolean execute() {
+		function();
 		return false;
 	}
+	
+	public abstract void function();
 
 	public String getName() {
 		return name;

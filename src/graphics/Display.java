@@ -94,7 +94,7 @@ public class Display extends Canvas{
 		int test = 0;
 		if (System.currentTimeMillis() % 550 > 275)
 			test = 1;
-		entities[Player.getInstance().getDir() * 2 + test].draw(g, 7 * 16 + 8, 6 * 16 + 8);
+		entities[Player.getInstance().getDir().spriteOff * 2 + test].draw(g, 7 * 16 + 8, 6 * 16 + 8);
 	}
 	
 	public void drawEntities()
