@@ -1,5 +1,6 @@
 package scripts;
 
+import graphics.Display;
 import inMain.Player;
 import theWorld.World;
 
@@ -12,6 +13,7 @@ public class WarpScript extends Script{
 	public WarpScript(String dest, int destX, int destY)
 	{
 		super();
+		System.out.println("WarpScript running");
 		this.dest = dest;
 		this.destX = destX;
 		this.destY = destY;
@@ -20,23 +22,33 @@ public class WarpScript extends Script{
 		ticks++;
 		switch(ticks)
 		{
-		case 15:
+		case 8:
+			Display.fade = 1;
 			break;
-		case 30:
+		case 16:
+			Display.fade = 2;
 			break;
-		case 45:
+		case 24:
+			Display.fade = 3;
 			break;
-		case 60:
+		case 32:
+			Display.fade = 4;
 			break;
-		case 61:
+		case 35:
 			World.setMap(dest);
 			Player.getInstance().setLocation(destX,destY);
 			break;
-		case 75:
+		case 60:
+			Display.fade = 3;
 			break;
-		case 90:
+		case 68:
+			Display.fade = 2;
 			break;
-		case 105:
+		case 76:
+			Display.fade = 1;
+			break;
+		case 84:
+			Display.fade = 0;
 			clearFocus();
 			return true;
 		default:

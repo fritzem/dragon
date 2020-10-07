@@ -19,6 +19,8 @@ import org.xml.sax.SAXException;
 
 import events.Event;
 import events.EventBuilder;
+import inMain.Direction;
+import inMain.SpriteRepo;
 import interfaces.TextMenu;
 
 public class Map {
@@ -102,7 +104,9 @@ public class Map {
 				Element entity = (Element) entities.item(i);
 				int locX = (int) Double.parseDouble(entity.getAttribute("x")) / tileSize;
 				int locY = (int) Double.parseDouble(entity.getAttribute("y")) / tileSize;
-				this.entities.add(new Entity(locX, locY, new TextMenu("Hello!")));
+				String sprite = getProperty(entity, "sprite");
+				System.out.println("Creating sprite: " + sprite);
+				this.entities.add(new Entity(locX, locY, Direction.DOWN, SpriteRepo.getSprite(sprite), new TextMenu("Hello!")));
 				System.out.println("Entity at " + locX + " " + locY);
 			}
 			
@@ -115,16 +119,31 @@ public class Map {
 
 	}
 	
+	public String getProperty(Element e, String propSeek)
+	{
+		NodeList properties = ((Element) e.getElementsByTagName("properties").item(0)).getElementsByTagName("property");
+		for (int i = 0; i < properties.getLength(); i++)
+		{
+			Element prop = (Element) properties.item(i);
+			if (prop.getAttribute("name").compareTo(propSeek) == 0)
+				return prop.getAttribute("value");
+		}
+		return "Property " + propSeek + " not found";
+	}
+	
 	public void queryEvent(int x, int y)
 	{
-		if (validLocation(x,y) && events[x][y] != null)
+		if (withinValidRange(x,y) && events[x][y] != null)
 			events[x][y].activate();
 	}
 	
+	
+	//returns true if tile is open for movement
 	public boolean validLocation(int x, int y)
 	{
 		//limits you to the map
-		//return (x >= 0 && y >= 0 && x < width && y < height);
+		if (!withinValidRange(x,y))
+			return false;
 		//limits you to col tiles
 		/*
 		if (x > 0 && y > 0 && (y + 1 < map.map[0].length) && (x + 1 < map.map.length))
@@ -135,6 +154,11 @@ public class Map {
 				return false;
 		}
 		return true;
+	}
+	
+	public boolean withinValidRange(int x, int y)
+	{
+		return (x >= 0 && y >= 0 && x < width && y < height);
 	}
 	
 	private void encodeTiles(String s)

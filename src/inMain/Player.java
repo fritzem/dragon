@@ -1,10 +1,12 @@
 package inMain;
 
+import java.awt.Graphics2D;
+
 import interfaces.CommandMenu;
 import theWorld.State;
 import theWorld.World;
 
-public class Player implements focusable, updatable{
+public class Player implements focusable, updatable, drawable{
 	
 	//Movement information
 	private static Player instance;
@@ -28,6 +30,12 @@ public class Player implements focusable, updatable{
 		State.setPlayer(this);
 		addUpdate();
 		instance = this;
+	}
+	
+	public void draw(Graphics2D g)
+	{
+		SpriteRepo.getSprite("hero").drawFrame(g, 7 * 16 + 8, 6 * 16 + 8, dir.spriteOff * 2 + ((System.currentTimeMillis() % 550 > 275) ? 1 : 0));
+		
 	}
 	
 	public static Player getInstance()
@@ -170,8 +178,11 @@ public class Player implements focusable, updatable{
 	public boolean update(long delta) {
 		slideX();
 		slideY();
-		if (slideX == 0 && slideY == 0)
+		if (slideX == 0 && slideY == 0 && moving)
+		{
+			moving = false;
 			World.queryEvent(x, y);
+		}
 		return false;
 	}
 }

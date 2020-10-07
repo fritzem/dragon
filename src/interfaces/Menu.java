@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
+import graphics.ISprite;
 import graphics.Sprite;
 import inMain.Input;
 import inMain.focusable;
@@ -40,7 +41,7 @@ public abstract class Menu implements updatable, MenuItem{
 		aug = 1;
 	}
 
-	public void draw(Graphics2D g, Sprite[] chars)
+	public void draw(Graphics2D g, ISprite[] chars)
 	{
 		g.setColor(Color.BLACK);
 		
@@ -63,20 +64,20 @@ public abstract class Menu implements updatable, MenuItem{
 			drawTitle(g, chars);
 	}
 	
-	public void drawText(Graphics2D g, Sprite[] chars, String text, int x, int y)
+	public void drawText(Graphics2D g, ISprite[] chars, String text, int x, int y)
 	{
 		for (int i = 0; i < text.length(); i++)
 			chars[text.charAt(i) - 32].draw(g, x + i * 8, y, cap);
 	}
 	
-	public void drawTextRight(Graphics2D g, Sprite[] chars, String text, int x, int y)
+	public void drawTextRight(Graphics2D g, ISprite[] chars, String text, int x, int y)
 	{
 		int ex = 0;
 		for (int i = text.length() - 1;  i >= 0; i--)
 			chars[text.charAt(i) - 32].draw(g, x - ex++ * 8, y, cap);
 	}
 	
-	public void drawTitle(Graphics2D g, Sprite[] chars)
+	public void drawTitle(Graphics2D g, ISprite[] chars)
 	{
 		int mid = (int) (((double)width / 2) - ((name.length()) / 2) * 8);
 		drawText(g, chars, name, x + mid, y);

@@ -3,6 +3,7 @@ package interfaces;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
+import graphics.ISprite;
 import graphics.Sprite;
 import inMain.Input;
 import theWorld.State;
@@ -46,7 +47,7 @@ public abstract class SelectionMenu extends FocusMenu{
 	//Implementations of the selection menu initialize their selections with this method
 	public abstract void getMenu();
 	
-	public void draw(Graphics2D g, Sprite[] chars)
+	public void draw(Graphics2D g, ISprite[] chars)
 	{
 		super.draw(g, chars);
 		for (int i = 0; i < list.length; i++)

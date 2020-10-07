@@ -2,7 +2,7 @@ package interfaces;
 
 import java.awt.Graphics2D;
 
-import graphics.Sprite;
+import graphics.ISprite;
 import inMain.Game;
 import theWorld.State;
 
@@ -14,7 +14,7 @@ public class FrameCounterMenu extends Menu {
 	}
 	
 	
-	public void draw(Graphics2D g, Sprite[] chars)
+	public void draw(Graphics2D g, ISprite[] chars)
 	{
 		super.draw(g, chars);
 		

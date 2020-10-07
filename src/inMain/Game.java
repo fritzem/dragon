@@ -26,6 +26,7 @@ public class Game {
 	
 	public Game()
 	{
+		SpriteRepo.InitSprites();
 		state = new State();
 		display = new Display();
 		input = new Input(display);

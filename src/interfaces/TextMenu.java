@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import java.util.Iterator;
 
+import graphics.ISprite;
 import graphics.Sprite;
 import inMain.Input;
 import inMain.focusable;
@@ -113,7 +114,7 @@ public class TextMenu extends FocusMenu{
 	}
 	
 	
-	public void draw(Graphics2D g, Sprite[] chars)
+	public void draw(Graphics2D g, ISprite[] chars)
 	{
 		super.draw(g, chars);
 		int xi = x + 8;

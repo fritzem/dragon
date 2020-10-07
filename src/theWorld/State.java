@@ -13,8 +13,8 @@ public class State {
 	
 	//Generic Arrays
 	private static Stack<focusable> focus;
-	private static ArrayList<updatable> updates;
-	private static ArrayList<updatable> tempUpdates;
+	private static ArrayList<updatable> updates = new ArrayList<updatable>();
+	private static ArrayList<updatable> tempUpdates = new ArrayList<updatable>();
 	public static ArrayList<Menu> menus;
 	
 	private static Iterator<updatable> upIt;
@@ -30,8 +30,6 @@ public class State {
 	public State()
 	{
 		focus = new Stack<>();
-		updates = new ArrayList<updatable>();
-		tempUpdates = new ArrayList<updatable>();
 		menus = new ArrayList<Menu>();
 		fps = 0;
 		

@@ -16,8 +16,4 @@ public class MiniStatusMenu extends Menu {
 		
 	}
 	
-	public void draw(Graphics2D g, Sprite[] chars)
-	{
-		super.draw(g, chars);
-	}
 }

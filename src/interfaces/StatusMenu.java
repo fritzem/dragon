@@ -2,7 +2,7 @@ package interfaces;
 
 import java.awt.Graphics2D;
 
-import graphics.Sprite;
+import graphics.ISprite;
 import theWorld.State;
 
 public class StatusMenu extends FocusMenu{
@@ -13,7 +13,7 @@ public class StatusMenu extends FocusMenu{
 	}
 	
 	
-	public void draw(Graphics2D g, Sprite[] chars)
+	public void draw(Graphics2D g, ISprite[] chars)
 	{
 		super.draw(g, chars);
 		drawTextRight(g, chars, "NAME:", x + 10 * 8, y + 8);

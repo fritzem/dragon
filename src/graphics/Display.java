@@ -8,6 +8,7 @@ import java.awt.image.RescaleOp;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
@@ -21,12 +22,16 @@ import theWorld.State;
 
 public class Display extends Canvas{
 	
+	public static int fade = 0;
+	
+	HashMap<String, PaletteSprite> paletteSprites;
+	ISprite[] tileSprites;
+	ISprite[] characterSprites;
+	
 	private JFrame display;
 	
-	private Sprite[] characters;
-	private Sprite[] tiles;
 	private Sprite[] entities;
-	private int size;
+	
 	private int scale;
 	
 	private BufferStrategy buffer;
@@ -67,10 +72,10 @@ public class Display extends Canvas{
 	
 	public void drawGame()
 	{
+		//System.out.println("got to draw");
 		//trash testers
 		
 		g.scale(scale, scale);
-		
 		//Draw the world
 		drawMap();
 		
@@ -78,23 +83,21 @@ public class Display extends Canvas{
 		drawPlayer();
 		
 		drawEntities();
-		
 		drawInterface();
+		
+		
 		
 	}
 	
 	public void drawInterface()
 	{
 		for (Menu m : State.menus)
-			m.draw(g, characters);
+			m.draw(g, characterSprites);
 	}
 	
 	public void drawPlayer()
 	{
-		int test = 0;
-		if (System.currentTimeMillis() % 550 > 275)
-			test = 1;
-		entities[Player.getInstance().getDir().spriteOff * 2 + test].draw(g, 7 * 16 + 8, 6 * 16 + 8);
+		Player.getInstance().draw(g);
 	}
 	
 	public void drawEntities()
@@ -103,8 +106,8 @@ public class Display extends Canvas{
 		int[] loc = State.getPlayer().getLocation();
 		for (Entity i : entities)
 		{
-			this.entities[64 + anim()].draw(g, (i.getX() - loc[0] + 7) * 16 + 8 + Player.getInstance().getSlideX(), 
-									 (i.getY() - loc[1] + 6) * 16 + 8 + Player.getInstance().getSlideY());
+			i.draw(g);
+			//i.draw(g, (i.getX() - loc[0] + 7) * 16 + 8 + Player.getInstance().getSlideX(), (i.getY() - loc[1] + 6) * 16 + 8 + Player.getInstance().getSlideY());
 		}
 	}
 	
@@ -118,13 +121,10 @@ public class Display extends Canvas{
 		int[] loc = State.getPlayer().getLocation();
 		int tX = loc[0] - 7;
 		int tY = loc[1] - 6;
+		int tileSize = 16; //broken??
 		
 		int slideX = Player.getInstance().getSlideX();
 		int slideY = Player.getInstance().getSlideY();
-		if (slideX == 0 && slideY == 0)
-		{
-			Player.getInstance().doneMoving();
-		}
 		
 		for (int i = -2; i < xTILES; i++) 
 		{
@@ -132,15 +132,27 @@ public class Display extends Canvas{
 			{
 				//off the grid?
 				if (tX + i < 0 || tX + i >= m.map.length || tY + k < 0 || tY + k >= (m.map[0].length))
-					tiles[m.getBackground()].draw(g,  (i% xTILES) * size + slideX + 8,  k * size + slideY + 8);
+					tileSprites[m.getBackground()].draw(g,  (i% xTILES) * tileSize + slideX + 8,  k * tileSize + slideY + 8);
 				else
-					tiles[m.map[tX + i][tY + k]].draw(g, (i % xTILES) * size + slideX + 8, k * size + slideY + 8);
+					tileSprites[m.map[tX + i][tY + k]].draw(g, (i % xTILES) * tileSize + slideX + 8, k * tileSize + slideY + 8);
 			}
 		}
 	}
 	
 	public void initSprites()
 	{	
+		SpriteLoader spriteLoader = new SpriteLoader();
+		
+		paletteSprites = spriteLoader.loadSpriteSets();
+		tileSprites = spriteLoader.loadTiles();
+		characterSprites = spriteLoader.loadCharacters();
+		
+		
+		//characters = readSheet("dragonFont8", 8, 0);
+		//tiles = readSheet("overworldSprites", 16, 1);
+		//entities = readSheet("entitySprites", 16, 0);
+		
+		
 		//g.drawImage(sprite, x, y, sprite.getWidth(), sprite.getHeight(), null);
 
 		//char sprites
@@ -151,29 +163,15 @@ public class Display extends Canvas{
 		{
 			characters[i] = new Sprite(characterSheet, (i % 16) * 16, i / 16 * 16, 7, 7);
 		} */
-		characters = readSheet("dragonFont8", 8, 0);
+		
+		
+		
+		
+		
 		
 		//tile sprites
-		tiles = readSheet("overworldSprites", 16, 1);
 		
-		entities = readSheet("entitySprites", 16, 0);
 		//entity sprites
-	}
-	
-	public Sprite[] readSheet(String name, int sprSize, int spacing)
-	{
-		Sprite tileSheet = new Sprite(name, sprSize);
-		size = tileSheet.getSize() + spacing;
-		int xSize = tileSheet.getWidth() / size;
-		int ySize = tileSheet.getHeight() / size;
-		Sprite[] arr = new Sprite[xSize * ySize];
-		
-		for (int i = 0; i < arr.length; i++)
-		{
-			arr[i] = new Sprite(tileSheet, (i % xSize) * size, (i / xSize) * size, sprSize, sprSize);
-		}
-		size -= spacing;
-		return arr;
 	}
 	
 	public int anim()

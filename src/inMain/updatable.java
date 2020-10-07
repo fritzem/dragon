@@ -12,5 +12,7 @@ public interface updatable {
 	{
 		State.removeUpdate(this);
 	}
+	
+	//Return true to purge
 	public boolean update(long delta);
 }
