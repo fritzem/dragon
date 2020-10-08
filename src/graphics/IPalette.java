@@ -2,6 +2,7 @@ package graphics;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 public interface IPalette {
 	public int getColor(int i);
@@ -29,6 +30,7 @@ public interface IPalette {
 		return -1;
 	}
 	
-	public default void addObserver(ISprite sprite) {System.out.println("I'm getting called");}
+	//For palettes that don't cause changes on their own.
+	public default void addObserver(ISprite sprite) {return;}
 	public Palette getBase();
 }

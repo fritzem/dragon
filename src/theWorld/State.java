@@ -24,6 +24,9 @@ public class State {
 	
 	private static Player player;
 	
+	//HP below certain threshold
+	public static boolean danger = false;
+	
 	
 	private static int fps;
 	

@@ -45,6 +45,12 @@ public class Input {
 				if (e.getKeyCode() == KeyEvent.VK_2) {
 					new FrameCounterMenu().execute();
 				}
+				if (e.getKeyCode() == KeyEvent.VK_3) {
+					State.danger = true;
+				}
+				if (e.getKeyCode() == KeyEvent.VK_4) {
+					State.danger = false;
+				}
 				if (e.getKeyCode() == KeyEvent.VK_C) {
 					keys[6] = true;
 				}

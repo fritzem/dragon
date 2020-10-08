@@ -10,10 +10,12 @@ import javax.imageio.ImageIO;
 public class FadePalette extends PaletteSubject implements IPalette{
 	
 	private IPalette[] palettes;
+	private int cachedFade;
 	
 	public FadePalette(File file)
 	{
 		super();
+		cachedFade = 0;
 		BufferedImage img = null;
 		try {
 			img = ImageIO.read(file);
@@ -34,4 +36,14 @@ public class FadePalette extends PaletteSubject implements IPalette{
 	public Palette getBase() {
 		return palettes[0].getBase();
 	}
+	
+	public boolean update(long delta) {
+		if (Display.fade != cachedFade)
+		{
+			update();
+			cachedFade = Display.fade;
+		}
+		return false;
+	}
+
 }

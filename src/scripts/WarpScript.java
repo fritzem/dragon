@@ -13,7 +13,6 @@ public class WarpScript extends Script{
 	public WarpScript(String dest, int destX, int destY)
 	{
 		super();
-		System.out.println("WarpScript running");
 		this.dest = dest;
 		this.destX = destX;
 		this.destY = destY;
@@ -22,16 +21,16 @@ public class WarpScript extends Script{
 		ticks++;
 		switch(ticks)
 		{
-		case 8:
+		case 7:
 			Display.fade = 1;
 			break;
-		case 16:
+		case 11:
 			Display.fade = 2;
 			break;
-		case 24:
+		case 15:
 			Display.fade = 3;
 			break;
-		case 32:
+		case 19:
 			Display.fade = 4;
 			break;
 		case 35:
@@ -41,13 +40,13 @@ public class WarpScript extends Script{
 		case 60:
 			Display.fade = 3;
 			break;
-		case 68:
+		case 64:
 			Display.fade = 2;
 			break;
-		case 76:
+		case 68:
 			Display.fade = 1;
 			break;
-		case 84:
+		case 72:
 			Display.fade = 0;
 			clearFocus();
 			return true;

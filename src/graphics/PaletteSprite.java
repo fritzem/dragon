@@ -3,7 +3,7 @@ package graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
-public class PaletteSprite implements ISprite{
+public class PaletteSprite implements ISprite {
 	
 	private int[][] spriteData;
 	private BufferedImage sprite;

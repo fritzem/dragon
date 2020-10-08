@@ -193,7 +193,8 @@ public class SpriteLoader {
 		IPalette pal = new FadePalette(def);
 		File dan = new File(dir, "/danger.png");
 		if (dan.exists()) {
-			
+			IPalette dPal = new FadePalette(dan);
+			return new DangerPalette(pal, dPal);
 		}
 		return pal;
 	}
