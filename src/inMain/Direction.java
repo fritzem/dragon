@@ -1,11 +1,15 @@
 package inMain;
 
+import java.util.Random;
+
 public enum Direction {
 	UP(0, -1, 2), DOWN(0, 1, 0), LEFT(-1, 0, 1), RIGHT(1, 0, 3);
 	
 	public final int xOff;
 	public final int yOff;
 	public final int spriteOff;
+	
+	private static Random rand = new Random();
 	
 	Direction(int xOff, int yOff, int spriteOff)
 	{
@@ -30,6 +34,22 @@ public enum Direction {
 		}
 	}
 	
+	public static Direction parse(int val) {
+		switch (val)
+		{
+			case 2:
+				return Direction.UP;
+			case 0:
+				return Direction.DOWN;
+			case 1:
+				return Direction.LEFT;
+			case 3:
+				return Direction.RIGHT;
+			default:
+				return Direction.DOWN;
+		}
+	}
+	
 	public static Direction inverse(Direction dir) {
 		switch (dir)
 		{
@@ -44,5 +64,9 @@ public enum Direction {
 			default:
 				return Direction.DOWN;
 		}
+	}
+	
+	public static Direction randDirection() {
+		return parse(rand.nextInt(4));
 	}
 }

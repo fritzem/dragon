@@ -30,8 +30,6 @@ public class Display extends Canvas{
 	
 	private JFrame display;
 	
-	private Sprite[] entities;
-	
 	private int scale;
 	
 	private BufferStrategy buffer;

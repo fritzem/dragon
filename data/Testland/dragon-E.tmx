@@ -95,6 +95,7 @@
   </object>
   <object id="27" gid="143" x="305.333" y="366.545" width="12.1818" height="13.4545">
    <properties>
+    <property name="behavior" value="wander"/>
     <property name="sprite" value="knight"/>
     <property name="type" value="npc"/>
    </properties>

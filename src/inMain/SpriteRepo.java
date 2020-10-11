@@ -21,7 +21,7 @@ public class SpriteRepo {
 		characterSprites = spriteLoader.loadCharacters();
 	}
 	
-	public static PaletteSprite getSprite(String name)
+	public static ISprite getSprite(String name)
 	{
 		return paletteSprites.get(name);
 	}
