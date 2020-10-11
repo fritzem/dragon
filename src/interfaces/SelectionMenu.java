@@ -57,8 +57,8 @@ public abstract class SelectionMenu extends FocusMenu{
 				drawText(g, chars, list[i][j].getName(), i * 64 + x + 16, j * 16 + y + yOffset);
 			}
 		}
-		
-		chars[91].draw(g, x + 8 + cursor / list[0].length * 64, y + yOffset + (cursor % list[0].length) * 16, cap);
+		if (System.currentTimeMillis() % 550 > 275)
+			chars[91].draw(g, x + 8 + cursor / list[0].length * 64, y + yOffset + (cursor % list[0].length) * 16, cap);
 	}
 
 	public void input()
