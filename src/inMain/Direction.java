@@ -13,4 +13,20 @@ public enum Direction {
 		this.yOff = yOff;
 		this.spriteOff = spriteOff;
 	}
+	
+	public static Direction parse(String str) {
+		switch (str.toUpperCase())
+		{
+			case "UP":
+				return Direction.UP;
+			case "DOWN":
+				return Direction.DOWN;
+			case "LEFT":
+				return Direction.LEFT;
+			case "RIGHT":
+				return Direction.RIGHT;
+			default:
+				return Direction.DOWN;
+		}
+	}
 }

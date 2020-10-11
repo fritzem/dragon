@@ -105,8 +105,9 @@ public class Map {
 				int locX = (int) Double.parseDouble(entity.getAttribute("x")) / tileSize;
 				int locY = (int) Double.parseDouble(entity.getAttribute("y")) / tileSize;
 				String sprite = getProperty(entity, "sprite");
+				String facing = getProperty(entity, "facing");
 				System.out.println("Creating sprite: " + sprite);
-				this.entities.add(new Entity(locX, locY, Direction.DOWN, SpriteRepo.getSprite(sprite), new TextMenu("Hello!")));
+				this.entities.add(new Entity(locX, locY, Direction.parse(facing), SpriteRepo.getSprite(sprite), new TextMenu("Hello!")));
 				System.out.println("Entity at " + locX + " " + locY);
 			}
 			
