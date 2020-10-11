@@ -20,6 +20,7 @@ import org.xml.sax.SAXException;
 import events.Event;
 import events.EventBuilder;
 import inMain.Direction;
+import inMain.Player;
 import inMain.SpriteRepo;
 import interfaces.TextMenu;
 import interfaces.IMenu;
@@ -177,6 +178,9 @@ public class Map {
 			if (i.getX() == x && i.getY() == y)
 				return false;
 		}
+		int[] loc = Player.getInstance().getLocation();
+		if (x == loc[0] && y == loc[1])
+			return false;
 		return true;
 	}
 	
