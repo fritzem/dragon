@@ -138,7 +138,7 @@ public class Game {
 	{
 		//Take input
 		inputLogic();
-		State.update();
+		State.update(delta);
 		
 		//Perform operations
 	}

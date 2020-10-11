@@ -139,14 +139,14 @@ public class State {
 		updates.trimToSize();
 	}
 	
-	public static void update()
+	public static void update(long delta)
 	{
 		updateArraylist();
 		upIt = updates.iterator();
 		while (upIt.hasNext())
 		{
 			updatable u = upIt.next();
-			if (u.update(0l))
+			if (u.update(delta))
 				upIt.remove();
 		}
 	}

@@ -29,4 +29,20 @@ public enum Direction {
 				return Direction.DOWN;
 		}
 	}
+	
+	public static Direction inverse(Direction dir) {
+		switch (dir)
+		{
+			case UP:
+				return Direction.DOWN;
+			case DOWN:
+				return Direction.UP;
+			case LEFT:
+				return Direction.RIGHT;
+			case RIGHT:
+				return Direction.LEFT;
+			default:
+				return Direction.DOWN;
+		}
+	}
 }

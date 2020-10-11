@@ -115,9 +115,10 @@ public class Map {
 						(propExists(entity, "dialogue")) ? new TextMenu(getProperty(entity, "dialogue")) : //Or make a dialogue box on the fly
 						new NullMenu() //Or nothing happens
 						);
+				Behavior behaves = (propExists(entity, "behavior") ? Behavior.parse(getProperty(entity, "behavior")) : Behavior.STILL);
 				
 				System.out.println("Creating sprite: " + sprite);
-				this.entities.add(new Entity(locX, locY, facing, SpriteRepo.getSprite(sprite), menu));
+				this.entities.add(new Entity(locX, locY, facing, SpriteRepo.getSprite(sprite), menu, behaves));
 				System.out.println("Entity at " + locX + " " + locY);
 			}
 			
