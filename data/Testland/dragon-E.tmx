@@ -82,6 +82,7 @@
  <objectgroup id="9" name="Entities">
   <object id="24" gid="129" x="194.333" y="63" width="13.3333" height="12">
    <properties>
+    <property name="dialogue" value="I am a humble guard."/>
     <property name="sprite" value="guard"/>
     <property name="type" value="npc"/>
    </properties>
@@ -101,6 +102,7 @@
   <object id="29" gid="123" x="368.75" y="31.25" width="14.5" height="14">
    <properties>
     <property name="facing" value="left"/>
+    <property name="menu" value="test"/>
     <property name="sprite" value="dragonLord"/>
     <property name="type" value="npc"/>
    </properties>

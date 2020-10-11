@@ -22,6 +22,9 @@ import events.EventBuilder;
 import inMain.Direction;
 import inMain.SpriteRepo;
 import interfaces.TextMenu;
+import interfaces.IMenu;
+import interfaces.MenuFactory;
+import interfaces.NullMenu;
 
 public class Map {
 	
@@ -104,10 +107,17 @@ public class Map {
 				Element entity = (Element) entities.item(i);
 				int locX = (int) Double.parseDouble(entity.getAttribute("x")) / tileSize;
 				int locY = (int) Double.parseDouble(entity.getAttribute("y")) / tileSize;
+				
 				String sprite = getProperty(entity, "sprite");
-				String facing = getProperty(entity, "facing");
+				Direction facing = (propExists(entity, "facing") ? Direction.parse(getProperty(entity, "facing")) : Direction.DOWN);
+				IMenu menu = (
+						(propExists(entity, "menu")) ? MenuFactory.getMenu(getProperty(entity, "menu")) : //Pull a complicated menu from the simple factory
+						(propExists(entity, "dialogue")) ? new TextMenu(getProperty(entity, "dialogue")) : //Or make a dialogue box on the fly
+						new NullMenu() //Or nothing happens
+						);
+				
 				System.out.println("Creating sprite: " + sprite);
-				this.entities.add(new Entity(locX, locY, Direction.parse(facing), SpriteRepo.getSprite(sprite), new TextMenu("Hello!")));
+				this.entities.add(new Entity(locX, locY, facing, SpriteRepo.getSprite(sprite), menu));
 				System.out.println("Entity at " + locX + " " + locY);
 			}
 			
@@ -130,6 +140,18 @@ public class Map {
 				return prop.getAttribute("value");
 		}
 		return "Property " + propSeek + " not found";
+	}
+	
+	public boolean propExists(Element e, String propSeek)
+	{
+		NodeList properties = ((Element) e.getElementsByTagName("properties").item(0)).getElementsByTagName("property");
+		for (int i = 0; i < properties.getLength(); i++)
+		{
+			Element prop = (Element) properties.item(i);
+			if (prop.getAttribute("name").compareTo(propSeek) == 0)
+				return true;
+		}
+		return false;
 	}
 	
 	public void queryEvent(int x, int y)

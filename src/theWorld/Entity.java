@@ -8,6 +8,7 @@ import inMain.Direction;
 import inMain.Player;
 import inMain.SpriteRepo;
 import inMain.drawable;
+import interfaces.IMenu;
 import interfaces.TextMenu;
 
 public class Entity implements drawable {
@@ -20,9 +21,9 @@ public class Entity implements drawable {
 	private PaletteSprite sprite;
 	
 	
-	private TextMenu talk;
+	private IMenu talk;
 	
-	public Entity(int x, int y, Direction dir, PaletteSprite sprite, TextMenu talk)
+	public Entity(int x, int y, Direction dir, PaletteSprite sprite, IMenu talk)
 	{
 		this.x = x;
 		this.y = y;

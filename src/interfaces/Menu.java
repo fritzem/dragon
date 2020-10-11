@@ -11,7 +11,7 @@ import inMain.focusable;
 import inMain.updatable;
 import theWorld.State;
 
-public abstract class Menu implements updatable, MenuItem{
+public abstract class Menu implements updatable, IMenu, MenuItem{
 	
 	protected int ticks;
 	protected int cap;
