@@ -34,7 +34,7 @@ public class Player implements focusable, updatable, drawable{
 	
 	public void draw(Graphics2D g)
 	{
-		SpriteRepo.getSprite("hero").drawFrame(g, 7 * 16 + 8, 6 * 16 + 8, dir.spriteOff * 2 + ((System.currentTimeMillis() % 550 > 275) ? 1 : 0));
+		SpriteRepo.getSprite("merchant").drawFrame(g, 7 * 16 + 8, 6 * 16 + 8, dir.spriteOff * 2 + ((System.currentTimeMillis() % 550 > 275) ? 1 : 0));
 		
 	}
 	
