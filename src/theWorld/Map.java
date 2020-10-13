@@ -196,8 +196,14 @@ public class Map {
 		{
 			arrOfTiles[i] = arrOfTiles[i].trim();
 			map[i % width][i / height] = Integer.parseInt(arrOfTiles[i]) - 1;
-			int[] validTiles = {4,5,7,8,9,12,13,14,15,16,17,19,20,21,22,23};
-			mapColl[i % width][i / height] = (Arrays.binarySearch(validTiles, Integer.parseInt(arrOfTiles[i]))) > 0 ? true : false;
+			int[] validTiles = new int[]{4,5,7,8,9,12,13,14,15,16,17,19,20,21,22,23};
+			mapColl[i % width][i / height] = false;
+			for (int k = 0; k < validTiles.length; k++)
+				if (Integer.parseInt(arrOfTiles[i]) == validTiles[k])
+				{
+					mapColl[i % width][i / height] = true;
+					break;
+				}
 		}
 	}
 	
