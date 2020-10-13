@@ -79,7 +79,7 @@ public class Map {
 			if (background != null)
 				this.background = Integer.parseInt(background);
 			else
-				this.background = 23;
+				this.background = 11;
 			
 			//gathers tile information
 			NodeList tiles = mapDoc.getElementsByTagName("data");
