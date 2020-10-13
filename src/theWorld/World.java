@@ -14,6 +14,7 @@ public class World {
 		maps.add(new Map("test1", name));
 		maps.add(new Map());
 		maps.add(new Map("town", name));
+		maps.add(new Map("Brecconary", name));
 		
 		index = 0;
 	}

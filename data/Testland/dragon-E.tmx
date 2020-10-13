@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="25" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="30">
+<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="25" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="32">
  <tileset firstgid="1" source="../../resources/overworldSprites.tsx"/>
- <tileset firstgid="73" source="../../resources/entitySprites.tsx"/>
+ <tileset firstgid="37" source="../../resources/entitySprites.tsx"/>
  <layer id="1" name="World" width="25" height="25">
   <properties>
    <property name="background" value="24"/>
@@ -78,29 +78,38 @@
    </properties>
    <point/>
   </object>
+  <object id="30" x="280.333" y="342.667">
+   <properties>
+    <property name="dest" value="Brecconary"/>
+    <property name="destX" value="0"/>
+    <property name="destY" value="15"/>
+    <property name="type" value="warp"/>
+   </properties>
+   <point/>
+  </object>
  </objectgroup>
  <objectgroup id="9" name="Entities">
-  <object id="24" gid="129" x="194.333" y="63" width="13.3333" height="12">
+  <object id="24" gid="93" x="192.25" y="64.9167" width="16" height="16">
    <properties>
     <property name="dialogue" value="I am a humble guard."/>
     <property name="sprite" value="guard"/>
     <property name="type" value="npc"/>
    </properties>
   </object>
-  <object id="25" gid="161" x="98" y="78.6667" width="12" height="13.3333">
+  <object id="25" gid="125" x="98" y="78.6667" width="12" height="13.3333">
    <properties>
     <property name="sprite" value="girl"/>
     <property name="type" value="npc"/>
    </properties>
   </object>
-  <object id="27" gid="143" x="305.333" y="366.545" width="12.1818" height="13.4545">
+  <object id="27" gid="107" x="305.333" y="366.545" width="12.1818" height="13.4545">
    <properties>
     <property name="behavior" value="wander"/>
     <property name="sprite" value="knight"/>
     <property name="type" value="npc"/>
    </properties>
   </object>
-  <object id="29" gid="123" x="368.75" y="31.25" width="14.5" height="14">
+  <object id="29" gid="87" x="368.75" y="31.25" width="14.5" height="14">
    <properties>
     <property name="facing" value="left"/>
     <property name="menu" value="test"/>

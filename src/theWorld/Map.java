@@ -106,8 +106,8 @@ public class Map {
 			for (int i = 0; i < entities.getLength(); i++)
 			{
 				Element entity = (Element) entities.item(i);
-				int locX = (int) Double.parseDouble(entity.getAttribute("x")) / tileSize;
-				int locY = (int) Double.parseDouble(entity.getAttribute("y")) / tileSize;
+				int locX = (int) ((Double.parseDouble(entity.getAttribute("x"))) + (tileSize / 2)) / tileSize;
+				int locY = (int) ((Double.parseDouble(entity.getAttribute("y"))) - (tileSize / 2)) / tileSize;
 				
 				String sprite = getProperty(entity, "sprite");
 				Direction facing = (propExists(entity, "facing") ? Direction.parse(getProperty(entity, "facing")) : Direction.DOWN);
