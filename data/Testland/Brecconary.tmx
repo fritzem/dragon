@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="2" nextobjectid="1">
+<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="10">
  <tileset firstgid="1" source="../../resources/overworldSprites.tsx"/>
+ <tileset firstgid="37" source="../../resources/entitySprites.tsx"/>
  <layer id="1" name="World" width="30" height="30">
   <data encoding="csv">
 2,2,2,2,2,2,2,2,2,2,2,2,2,21,4,4,21,2,2,2,2,2,2,2,2,2,2,2,2,2,
@@ -35,4 +36,59 @@
 2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,25,25,25,25,25,25,25,25,25,25
 </data>
  </layer>
+ <objectgroup id="5" name="Events"/>
+ <objectgroup id="2" name="Entities">
+  <object id="1" gid="117" x="16.5" y="223.5" width="16" height="16">
+   <properties>
+    <property name="dialogue" value="Thou art most welcome in Brecconary."/>
+    <property name="sprite" value="man"/>
+    <property name="type" value="npc"/>
+   </properties>
+  </object>
+  <object id="2" gid="125" x="62" y="127" width="16" height="16">
+   <properties>
+    <property name="sprite" value="girl"/>
+    <property name="type" value="npc"/>
+   </properties>
+  </object>
+  <object id="3" gid="133" x="80" y="79" width="16" height="16">
+   <properties>
+    <property name="sprite" value="merchant"/>
+    <property name="type" value="npc"/>
+   </properties>
+  </object>
+  <object id="4" gid="97" x="160" y="431" width="16" height="16">
+   <properties>
+    <property name="facing" value="up"/>
+    <property name="sprite" value="guard"/>
+    <property name="type" value="npc"/>
+   </properties>
+  </object>
+  <object id="5" gid="121" x="322" y="386" width="16" height="16">
+   <properties>
+    <property name="facing" value="up"/>
+    <property name="sprite" value="man"/>
+    <property name="type" value="npc"/>
+   </properties>
+  </object>
+  <object id="7" gid="135" x="160" y="352" width="16" height="16">
+   <properties>
+    <property name="facing" value="left"/>
+    <property name="sprite" value="merchant"/>
+    <property name="type" value="npc"/>
+   </properties>
+  </object>
+  <object id="8" gid="117" x="320" y="175" width="16" height="16">
+   <properties>
+    <property name="sprite" value="man"/>
+    <property name="type" value="npc"/>
+   </properties>
+  </object>
+  <object id="9" gid="109" x="386" y="177" width="16" height="16">
+   <properties>
+    <property name="sprite" value="elder"/>
+    <property name="type" value="npc"/>
+   </properties>
+  </object>
+ </objectgroup>
 </map>

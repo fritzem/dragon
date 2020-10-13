@@ -3,6 +3,7 @@ package theWorld;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 import javax.imageio.ImageIO;
@@ -170,9 +171,8 @@ public class Map {
 		if (!withinValidRange(x,y))
 			return false;
 		//limits you to col tiles
-		/*
-		if (x > 0 && y > 0 && (y + 1 < map.map[0].length) && (x + 1 < map.map.length))
-			return (!map.mapColl[x][y]); */
+		if (!mapColl[x][y])
+			return false;
 		for (Entity i : entities)
 		{
 			if (i.getX() == x && i.getY() == y)
@@ -196,42 +196,8 @@ public class Map {
 		{
 			arrOfTiles[i] = arrOfTiles[i].trim();
 			map[i % width][i / height] = Integer.parseInt(arrOfTiles[i]) - 1;
-			switch (Integer.parseInt(arrOfTiles[i]))
-			{
-			case 4:
-			case 5:
-			case 7:
-			case 8:
-			case 16:
-			case 17: 
-			case 19:
-			case 20:
-			case 25:
-			case 26: 
-			case 27:
-			case 28:
-			case 29:
-			case 31:
-			case 32:
-			case 33:
-			case 34:
-			case 35:
-			case 37:
-			case 38:
-			case 39:
-			case 40:
-			case 41:
-			case 43:
-			case 44:
-			case 45:
-			case 46:
-			case 47:
-				mapColl[i % width][i / height] = false;
-				break;
-			default:
-				mapColl[i % width][i / height] = true;
-			}
-			
+			int[] validTiles = {4,5,7,8,9,12,13,14,15,16,17,19,20,21,22,23};
+			mapColl[i % width][i / height] = (Arrays.binarySearch(validTiles, Integer.parseInt(arrOfTiles[i]))) > 0 ? true : false;
 		}
 	}
 	
