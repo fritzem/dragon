@@ -52,6 +52,13 @@ public class Player implements focusable, updatable, drawable{
 		this.x = x;
 		this.y = y;
 	}
+	
+	public void setLocation(int x, int y, Direction dir)
+	{
+		this.x = x;
+		this.y = y;
+		this.dir = dir;
+	}
 	public void doneMoving()
 	{
 		moving = false;

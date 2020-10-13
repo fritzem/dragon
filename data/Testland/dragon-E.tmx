@@ -83,6 +83,7 @@
     <property name="dest" value="Brecconary"/>
     <property name="destX" value="0"/>
     <property name="destY" value="15"/>
+    <property name="face" value="right"/>
     <property name="type" value="warp"/>
    </properties>
    <point/>
