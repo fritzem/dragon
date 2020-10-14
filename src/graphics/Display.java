@@ -130,9 +130,13 @@ public class Display extends Canvas{
 			{
 				//off the grid?
 				if (tX + i < 0 || tX + i >= m.map.length || tY + k < 0 || tY + k >= (m.map[0].length))
-					tileSprites[m.getBackground()].draw(g,  (i% xTILES) * tileSize + slideX + 8,  k * tileSize + slideY + 8);
+				{
+					if (!m.indoors())
+						tileSprites[m.getBackground()].draw(g,  (i% xTILES) * tileSize + slideX + 8,  k * tileSize + slideY + 8);
+				}
 				else
-					tileSprites[m.map[tX + i][tY + k]].draw(g, (i % xTILES) * tileSize + slideX + 8, k * tileSize + slideY + 8);
+					m.drawTile(g, (i % xTILES) * tileSize + slideX + 8, k * tileSize + slideY + 8, tX + i, tY + k);
+				//tileSprites[m.map[tX + i][tY + k]].draw(g, (i % xTILES) * tileSize + slideX + 8, k * tileSize + slideY + 8);
 			}
 		}
 	}

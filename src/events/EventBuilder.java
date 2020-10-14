@@ -23,6 +23,10 @@ public class EventBuilder {
 					return new WarpEvent(event);
 				case "print":
 					return new PrintEvent(event);
+				case "indoor":
+					return new IndoorEvent();
+				case "outdoor":
+					return new OutdoorEvent();
 				default:
 					throw new Exception("No valid event type specified.");
 			}

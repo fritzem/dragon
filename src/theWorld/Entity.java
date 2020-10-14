@@ -47,6 +47,8 @@ public class Entity implements drawable, updatable {
 	}
 	
 	public void draw(Graphics2D g) {
+		if (!State.getMap().visible(x, y))
+			return;
 		Player p = Player.getInstance();
 		int[] loc = p.getLocation();
 		sprite.drawFrame(g, (int)((x - loc[0] + 7) * 16 + 8 + p.getSlideX() + slideX), 

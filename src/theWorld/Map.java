@@ -1,9 +1,11 @@
 package theWorld;
 
+import java.awt.Graphics2D;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Scanner;
 
 import javax.imageio.ImageIO;
@@ -33,6 +35,10 @@ public class Map {
 	public int[][] map;
 	public boolean[][] mapColl;
 	public Event[][] events;
+	public int[][] roof;
+	
+	private boolean roofed;
+	private boolean indoors;
 	
 	private ArrayList<Entity> entities;
 	
@@ -75,16 +81,27 @@ public class Map {
 			events = new Event[width][height];
 			entities = new ArrayList<Entity>();
 			
+			
+			//Gathers layers, "World", "Roof"
+			HashMap<String, Element> layers = getElementsNamed(e, "layer");
+			
 			//background info, if not found, set to black
-			String background = findAttribute(e, "background");
+			String background = findAttribute(layers.get("World"), "background");
 			if (background != null)
 				this.background = Integer.parseInt(background);
 			else
 				this.background = 11;
 			
 			//gathers tile information
-			NodeList tiles = mapDoc.getElementsByTagName("data");
-			encodeTiles(tiles.item(0).getTextContent());
+			encodeTiles(layers.get("World").getElementsByTagName("data").item(0).getTextContent());
+			if (layers.containsKey("Roof"))
+			{
+				roofed = true;
+				roof = parseTiles(layers.get("Roof").getElementsByTagName("data").item(0).getTextContent());
+			} else {
+				roofed = false;
+			}
+			indoors = false;
 			
 			
 			//begin gathering layered metadata
@@ -131,6 +148,17 @@ public class Map {
 		}
 		
 
+	}
+	
+	public HashMap<String, Element> getElementsNamed(Element e, String eleSeek)
+	{
+		NodeList elements = e.getElementsByTagName(eleSeek);
+		HashMap<String, Element> map = new HashMap<String, Element>();
+		for (int i = 0; i < elements.getLength(); i++)
+		{
+			map.put(((Element) elements.item(i)).getAttribute("name"), (Element) elements.item(i));
+		}
+		return map;
 	}
 	
 	public String getProperty(Element e, String propSeek)
@@ -207,6 +235,18 @@ public class Map {
 		}
 	}
 	
+	private int[][] parseTiles(String s)
+	{
+		String[] arrOfTiles = s.split(",");
+		int[][] tiles = new int[width][height];
+		for (int i = 0; i < arrOfTiles.length; i++)
+		{
+			arrOfTiles[i] = arrOfTiles[i].trim();
+			tiles[i % width][i / height] = Integer.parseInt(arrOfTiles[i]) - 1;
+		}
+		return tiles;
+	}
+	
 	public String findAttribute(Element event, String find)
 	{
 		NodeList properties = event.getElementsByTagName("property");
@@ -253,4 +293,30 @@ public class Map {
 		}
 		new TextMenu("There is no one there.").execute();
 	}
+	
+	public void drawTile(Graphics2D g, int x, int y, int tX, int tY)
+	{
+		if (visible(tX, tY))
+			SpriteRepo.tileSprites[map[tX][tY]].draw(g, x, y);
+		else {
+			if (roof[tX][tY] != -1)
+				SpriteRepo.tileSprites[roof[tX][tY]].draw(g, x, y);
+		}
+	}
+	
+	//Returns true or false depending on whether the tile is visible
+	public boolean visible(int x, int y)
+	{
+		if (!roofed)
+			return true;
+		return ((!indoors && roof[x][y] == -1) ||
+				 indoors && roof[x][y] != -1);
+	}
+	
+	public void setIndoors(boolean b) {indoors = b;}
+	
+	public boolean indoors() {return indoors;}
+	
+	
+	
 }
