@@ -1,6 +1,5 @@
 package theWorld;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Stack;
 
 import inMain.Player;
@@ -11,13 +10,13 @@ import interfaces.Menu;
 
 public class State {
 	
-	//Generic Arrays
+	//Whatever is currently receiving the input
 	private static Stack<focusable> focus;
-	private static ArrayList<updatable> updates = new ArrayList<updatable>();
-	private static ArrayList<updatable> tempUpdates = new ArrayList<updatable>();
-	public static ArrayList<Menu> menus;
 	
-	private static Iterator<updatable> upIt;
+	//Whatever is currently receiving the only updates
+	private static Stack<Update> updateStack = new Stack<Update>();
+	
+	public static ArrayList<Menu> menus;
 	
 	private static World world;
 	
@@ -130,34 +129,25 @@ public class State {
 	 */
 	public static void addUpdate(updatable update)
 	{
-		tempUpdates.add(update);
+		if (updateStack.empty())
+			updateStack.push(new Update(update));
+		else
+			updateStack.peek().addUpdate(update);
 	}
 	
-	public static void removeUpdate(updatable update)
+	public static void pushUpdate(updatable update)
 	{
-		updates.remove(update);
-		updates.trimToSize();
+		System.out.println("push");
+		updateStack.push(new Update(update));
 	}
 	
 	public static void update(long delta)
 	{
-		updateArraylist();
-		upIt = updates.iterator();
-		while (upIt.hasNext())
+		if (!updateStack.empty())
 		{
-			updatable u = upIt.next();
-			if (u.update(delta))
-				upIt.remove();
+			if (updateStack.peek().update(delta))
+				updateStack.pop();
 		}
 	}
 	
-	public static void updateArraylist()
-	{
-		tempUpdates.trimToSize();
-		for (updatable u : tempUpdates)
-		{
-			updates.add(u);
-		}
-		tempUpdates = new ArrayList<updatable>();
-	}
 }

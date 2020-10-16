@@ -18,7 +18,12 @@ public abstract class FocusMenu extends Menu implements focusable {
 	
 	public boolean execute()
 	{
-		super.execute();
+		aug = 1;
+		cap = y;
+		ticks = 0;
+		open = false;
+		State.enqueue(this);
+		pushUpdate();
 		addFocus();
 		return false;
 	}

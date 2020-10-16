@@ -12,7 +12,7 @@ public abstract class Script implements focusable, updatable{
 		ticks = 0;
 		
 		addFocus();
-		addUpdate();
+		pushUpdate();
 	}
 	public void input(){}
 	

@@ -8,9 +8,9 @@ public interface updatable {
 	{
 		State.addUpdate(this);
 	}
-	default public void removeUpdate()
+	default public void pushUpdate()
 	{
-		State.removeUpdate(this);
+		State.pushUpdate(this);
 	}
 	
 	//Return true to purge
