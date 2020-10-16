@@ -15,6 +15,7 @@ public class State {
 	
 	//Whatever is currently receiving the only updates
 	private static Stack<Update> updateStack = new Stack<Update>();
+	private static Update staticUpdate = new Update();
 	
 	public static ArrayList<Menu> menus;
 	
@@ -137,17 +138,23 @@ public class State {
 	
 	public static void pushUpdate(updatable update)
 	{
-		System.out.println("push");
 		updateStack.push(new Update(update));
+	}
+	
+	public static void staticUpdate(updatable update)
+	{
+		staticUpdate.addUpdate(update);
 	}
 	
 	public static void update(long delta)
 	{
+		staticUpdate.update(delta);
 		if (!updateStack.empty())
 		{
 			if (updateStack.peek().update(delta))
 				updateStack.pop();
 		}
 	}
+	
 	
 }

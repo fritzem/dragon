@@ -24,8 +24,7 @@ public class Update {
 	
 	public void addUpdate(updatable update)
 	{
-		if (!tempUpdates.add(update))
-			System.out.println("hey");
+		tempUpdates.add(update);
 	}
 	
 	public void removeUpdate(updatable update)
@@ -38,16 +37,11 @@ public class Update {
 	{
 		updateArraylist();
 		upIt = updates.iterator();
-		System.out.println("Update");
 		while (upIt.hasNext())
 		{
 			updatable u = upIt.next();
 			if (u.update(delta))
-			{
-				System.out.println("return true");
-				updates.remove(u);
 				upIt.remove();
-			}
 		}
 		updates.trimToSize();
 		return (updates.isEmpty());

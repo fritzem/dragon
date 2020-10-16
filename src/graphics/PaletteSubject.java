@@ -12,7 +12,7 @@ public abstract class PaletteSubject implements updatable{
 	public PaletteSubject()
 	{
 		sprites = new ArrayList<ISprite>();
-		addUpdate();
+		staticUpdate();
 	}
 	public void addObserver(ISprite sprite)
 	{

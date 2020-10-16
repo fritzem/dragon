@@ -23,7 +23,7 @@ public class WarpScript extends Script{
 		this.face = face;
 	}
 	public boolean update(long delta) {
-		ticks++;
+		ticks++; //Need to use delta
 		switch(ticks)
 		{
 		case 7:
