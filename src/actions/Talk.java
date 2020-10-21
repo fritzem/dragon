@@ -12,7 +12,7 @@ public class Talk implements MenuItem{
 	@Override
 	public boolean execute(IMenu m) {
 		int[] coords = Player.getInstance().getFaceBlock();
-		State.getMap().talk(coords[0], coords[1]).execute(m);
+		State.getMap().talk(coords[0], coords[1], Player.getInstance().getDir()).execute(m);
 		return false;
 	}
 

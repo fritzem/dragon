@@ -108,6 +108,7 @@
   </object>
   <object id="3" gid="133" x="80" y="79" width="16" height="16">
    <properties>
+    <property name="dialogue" value="testing"/>
     <property name="sprite" value="merchant"/>
     <property name="type" value="npc"/>
    </properties>
@@ -128,6 +129,7 @@
   </object>
   <object id="7" gid="135" x="160" y="352" width="16" height="16">
    <properties>
+    <property name="dialogue" value="sorry the inn isn't open lol"/>
     <property name="facing" value="left"/>
     <property name="sprite" value="merchant"/>
     <property name="type" value="npc"/>

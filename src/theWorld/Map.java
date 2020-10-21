@@ -303,8 +303,15 @@ public class Map {
 		return entities;
 	}
 	
-	public IMenu talk(int x, int y)
+	public IMenu talk(int x, int y, Direction dir)
 	{
+		if (!withinValidRange(x,y))
+			return new TextMenu("There is no one there.");
+		if (map[x][y] == 2)
+		{
+			x += dir.xOff;
+			y += dir.yOff;
+		}
 		for (Entity e : entities)
 		{
 			if (e.getX() == x && e.getY() == y)
