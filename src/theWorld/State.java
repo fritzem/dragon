@@ -76,6 +76,15 @@ public class State {
 		return world.getMap().validLocation(x, y);
 	}
 	
+	public static boolean validPlayerSpot(int x, int y)
+	{
+		return world.getMap().validPlayerLocation(x, y);
+	}
+	
+	public static void queryEvent(int x, int y)
+	{
+		world.getMap().queryEvent(x, y);
+	}
 	
 	/*
 	 * Objects that take input are focusable

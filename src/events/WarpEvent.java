@@ -21,6 +21,14 @@ public class WarpEvent implements Event{
 			face = null;
 		}
 	}
+	public WarpEvent(String dest, int destX, int destY, Direction face)
+	{
+		this.dest = dest;
+		this.destX = destX;
+		this.destY = destY;
+		this.face = face;
+	}
+	
 	public void activate() {
 		if (face == null)
 			new WarpScript(dest, destX, destY);

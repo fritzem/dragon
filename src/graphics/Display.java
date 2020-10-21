@@ -39,7 +39,7 @@ public class Display extends Canvas{
 	public Display()
 	{
 		display = new JFrame();
-		scale = 4;
+		scale = 2;
 		this.setSize(256 * scale ,224 * scale);
 		display.add(this);
 		display.setTitle("Dragon Warrior");

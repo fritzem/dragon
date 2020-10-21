@@ -129,52 +129,22 @@ public class Player implements focusable, updatable, drawable{
 			new CommandMenu().execute();
 			return;
 		}
-		if (input.getKeys()[0])
+		for (int i = 0; i < 4; i++)
 		{
-			dir = Direction.UP;
-			if (State.validSpot(x, y-1))
+			if (input.getKeys()[i])
 			{
-				moving = true;
-				slideY = -16;
-				y--;
-			}
-			
-		}
-		else if (Input.getInput().getKeys()[1])
-		{
-			dir = Direction.LEFT;
-			if (State.validSpot(x-1, y))
-			{
-				moving = true;
-				slideX = -16;
-				x--;
-			}
-			
-		}
-		else if (Input.getInput().getKeys()[2])
-		{
-			dir = Direction.DOWN;
-			if (State.validSpot(x, y+1))
-			{
-				moving = true;
-				slideY = 16;
-				y++;
-			}
-			
-		}
-		else if (Input.getInput().getKeys()[3])
-		{
-			dir = Direction.RIGHT;
-			//if valid move
-			if (State.validSpot(x+1,y))
-			{
-				moving = true;
-				slideX = 16;
-				x++;
+				dir = Direction.parse(i);
+				if (State.validPlayerSpot(x+dir.xOff, y+dir.yOff))
+				{
+					moving = true;
+					slideX = 16 * dir.xOff;
+					slideY = 16 * dir.yOff;
+					x += dir.xOff;
+					y += dir.yOff;
+					return;
+				}
 			}
 		}
-		
-		
 	}
 	
 	public int[] getFaceBlock()

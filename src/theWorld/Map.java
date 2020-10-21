@@ -48,6 +48,7 @@ public class Map {
 	private String name;
 	
 	private int background;
+	private Event oobEvent;
 	
 	public Map()
 	{
@@ -91,6 +92,10 @@ public class Map {
 				this.background = Integer.parseInt(background);
 			else
 				this.background = 11;
+			
+			//OOB warp info, if not found, no biggie
+			oobEvent = EventBuilder.buildEvent(layers.get("World"));
+				
 			
 			//gathers tile information
 			encodeTiles(layers.get("World").getElementsByTagName("data").item(0).getTextContent());
@@ -189,6 +194,8 @@ public class Map {
 	{
 		if (withinValidRange(x,y) && events[x][y] != null)
 			events[x][y].activate();
+		else if (!withinValidRange(x,y))
+			oobEvent.activate();
 	}
 	
 	
@@ -209,6 +216,21 @@ public class Map {
 		int[] loc = Player.getInstance().getLocation();
 		if (x == loc[0] && y == loc[1])
 			return false;
+		return true;
+	}
+	
+	public boolean validPlayerLocation(int x, int y)
+	{
+		if (!withinValidRange(x,y))
+			return true;
+		//limits you to col tiles
+		if (!mapColl[x][y])
+			return false;
+		for (Entity i : entities)
+		{
+			if (i.getX() == x && i.getY() == y)
+				return false;
+		}
 		return true;
 	}
 	

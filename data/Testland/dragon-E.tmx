@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="25" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="32">
+<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="25" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="33">
  <tileset firstgid="1" source="../../resources/overworldSprites.tsx"/>
  <tileset firstgid="37" source="../../resources/entitySprites.tsx"/>
  <layer id="1" name="World" width="25" height="25">
@@ -84,6 +84,15 @@
     <property name="destX" value="0"/>
     <property name="destY" value="15"/>
     <property name="face" value="right"/>
+    <property name="type" value="warp"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="32" x="313.333" y="309.333">
+   <properties>
+    <property name="dest" value="dragon-E"/>
+    <property name="destX" value="14"/>
+    <property name="destY" value="10"/>
     <property name="type" value="warp"/>
    </properties>
    <point/>

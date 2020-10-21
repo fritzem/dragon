@@ -5,6 +5,11 @@
  <layer id="1" name="World" width="30" height="30">
   <properties>
    <property name="background" value="14"/>
+   <property name="dest" value="dragon-E"/>
+   <property name="destX" value="17"/>
+   <property name="destY" value="21"/>
+   <property name="face" value="down"/>
+   <property name="type" value="warp"/>
   </properties>
   <data encoding="csv">
 2,2,2,2,2,2,2,2,2,2,2,2,2,21,4,4,21,2,2,2,2,2,2,2,2,2,2,2,2,2,
