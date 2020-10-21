@@ -11,6 +11,7 @@ import inMain.SpriteRepo;
 import inMain.drawable;
 import inMain.updatable;
 import interfaces.IMenu;
+import interfaces.Menu;
 import interfaces.TextMenu;
 
 public class Entity implements drawable, updatable {
@@ -66,13 +67,13 @@ public class Entity implements drawable, updatable {
 		return y;
 	}
 	
-	public void talk()
+	public IMenu talk()
 	{
 		this.dir = Direction.inverse(Player.getInstance().getDir());
 		if (talk != null)
-			talk.execute();
+			return talk;
 		else
-			new TextMenu("There is no one there.").execute();
+			return new TextMenu("...");
 	}
 
 	public boolean update(long delta) {

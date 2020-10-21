@@ -281,17 +281,16 @@ public class Map {
 		return entities;
 	}
 	
-	public void talk(int x, int y)
+	public IMenu talk(int x, int y)
 	{
 		for (Entity e : entities)
 		{
 			if (e.getX() == x && e.getY() == y)
 			{
-				e.talk();
-				return;
+				return e.talk();
 			}
 		}
-		new TextMenu("There is no one there.").execute();
+		return new TextMenu("There is no one there.");
 	}
 	
 	public void drawTile(Graphics2D g, int x, int y, int tX, int tY)

@@ -11,6 +11,6 @@ public class Torch extends Item {
 	
 	public void function()
 	{
-		new TextMenu("A torch can be used only in dark places.").execute();
+		new TextMenu("A torch can be used only in dark places.").execute(m);
 	}
 }

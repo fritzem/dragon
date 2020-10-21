@@ -26,6 +26,8 @@ public abstract class Menu implements updatable, IMenu, MenuItem{
 	
 	protected boolean showName;
 	
+	protected IMenu caller;
+	
 	public Menu(int x, int y, int width, int height, String name)
 	{
 		this.x = x;
@@ -36,6 +38,8 @@ public abstract class Menu implements updatable, IMenu, MenuItem{
 		
 		
 		showName = true;
+		
+		this.caller = null;
 		
 		open = false;
 		aug = 1;
@@ -83,6 +87,12 @@ public abstract class Menu implements updatable, IMenu, MenuItem{
 		drawText(g, chars, name, x + mid, y);
 	}
 	
+	public boolean execute(IMenu m)
+	{
+		caller = m;
+		return execute();
+	}
+	
 	public boolean execute()
 	{
 		aug = 1;
@@ -91,7 +101,7 @@ public abstract class Menu implements updatable, IMenu, MenuItem{
 		open = false;
 		State.enqueue(this);
 		addUpdate();
-		return true;
+		return false;
 	}
 	
 	public void close()
@@ -102,8 +112,9 @@ public abstract class Menu implements updatable, IMenu, MenuItem{
 	
 	public void finishClose()
 	{
-		
-		//removeUpdate();
+		State.dequeue(this);
+		if (caller != null)
+			caller.close();
 	}
 	
 	public boolean update(long delta)
@@ -116,7 +127,7 @@ public abstract class Menu implements updatable, IMenu, MenuItem{
 				open = true;
 			if (ticks <= 0)
 			{
-				State.dequeue(this);
+				finishClose();
 				return true;
 			}
 		}
