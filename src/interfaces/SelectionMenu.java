@@ -66,9 +66,9 @@ public abstract class SelectionMenu extends FocusMenu{
 		if (!open)
 			return;
 		Input input = Input.getInput();
-		if (input.getKeys()[0])
+		if (input.getKeys()[2])
 		{
-			input.getKeys()[0] = false;			
+			input.getKeys()[2] = false;			
 			if (cursor % list[0].length > 0)
 				cursor--;
 		}
@@ -78,9 +78,9 @@ public abstract class SelectionMenu extends FocusMenu{
 			if (cursor >= list[0].length)
 				cursor -= list[0].length;
 		}
-		if (input.getKeys()[2])
+		if (input.getKeys()[0])
 		{
-			input.getKeys()[2] = false;			
+			input.getKeys()[0] = false;			
 			if (cursor % list[0].length < list[0].length - 1)
 				cursor++;
 		}
